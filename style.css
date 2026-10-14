@@ -867,3 +867,112 @@ svg { display: block; }
   .trust-bar-inner { grid-template-columns: 1fr 1fr; }
   .about-stats { flex-wrap: wrap; gap: 20px; }
 }
+
+/* ==========================================================================
+   Phase 1 — Design & Motion
+   ========================================================================== */
+
+/* ---------- Scroll reveal (progressive enhancement: JS adds .reveal) ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1),
+              transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* ---------- Header shrink on scroll ---------- */
+.site-header { transition: box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease; }
+.header-inner { transition: height 0.25s ease; }
+.site-header.is-scrolled .header-inner { height: 64px; }
+.site-header.is-scrolled .brand-mark { width: 28px; height: 28px; transition: width 0.25s ease, height 0.25s ease; }
+
+/* ---------- Scrollspy active nav state ---------- */
+.main-nav a.is-active { color: var(--copper-600); }
+.main-nav a.is-active::after { transform: scaleX(1); }
+
+/* ---------- Button / card micro-interactions ---------- */
+.btn:active { transform: scale(0.96); }
+.service-card, .why-card, .review-card, .related-card { transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease; }
+.why-card:hover { transform: translateY(-3px); }
+.why-icon { transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease; }
+.why-card:hover .why-icon { background: var(--copper-100); color: var(--copper-600); transform: scale(1.06); }
+
+/* ---------- Hero / page-hero decorative parallax layer ---------- */
+.hero, .page-hero { position: relative; overflow: hidden; }
+.hero-decor {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  will-change: transform;
+}
+.hero-decor::before, .hero-decor::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.35;
+}
+.hero-decor::before {
+  width: 380px; height: 380px;
+  background: var(--teal-400);
+  top: -120px; right: -80px;
+}
+.hero-decor::after {
+  width: 260px; height: 260px;
+  background: var(--copper-500);
+  bottom: -100px; left: 10%;
+  opacity: 0.18;
+}
+.hero-inner, .page-hero .container { position: relative; z-index: 1; }
+@media (prefers-reduced-motion: reduce) {
+  .hero-decor { transform: none !important; }
+}
+
+/* ---------- Placeholder image component ---------- */
+.img-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: repeating-linear-gradient(135deg, var(--bg-alt), var(--bg-alt) 10px, var(--surface) 10px, var(--surface) 20px);
+  border: 1.5px dashed var(--border);
+  border-radius: var(--radius-md);
+  color: var(--text-muted);
+  text-align: center;
+  padding: 24px;
+  min-height: 180px;
+}
+.img-placeholder svg { width: 32px; height: 32px; color: var(--teal-500); opacity: 0.7; }
+.img-placeholder span {
+  font-size: 0.82rem;
+  font-weight: 600;
+  max-width: 22ch;
+}
+.img-placeholder.tall { min-height: 260px; }
+.img-placeholder.wide { min-height: 220px; }
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+/* ---------- Stat counters (plain styling hook, animation via JS) ---------- */
+[data-count-to] { font-variant-numeric: tabular-nums; }
+
+@media (max-width: 780px) {
+  .site-header.is-scrolled .header-inner { height: 60px; }
+}
