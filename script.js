@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initSmoothAnchorClose();
   initBackToTop();
   initContactForm();
+  initQuickForm();
+  initCarousels();
   initScrollReveal();
   initCounters();
   initScrollspy();
@@ -96,6 +98,44 @@ function initBackToTop() {
   });
 }
 
+// ---------------------------------------------------------------------------
+// Lead delivery, shared by the main booking form and the hero quick bar.
+// Endpoint lives on #contactForm's data-endpoint (see README). Returns 'sent'
+// when the webhook accepted it, 'mailto' when we fell back to the email app.
+const BUSINESS_EMAIL = 'info@dunedinplumbing.co.uk';
+
+function leadEndpoint() {
+  const form = document.getElementById('contactForm');
+  return form ? (form.dataset.endpoint || '').trim() : '';
+}
+
+async function deliverLead(data) {
+  const endpoint = leadEndpoint();
+  if (endpoint) {
+    try {
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      if (res.ok) return 'sent';
+    } catch (err) { /* fall through to email */ }
+  }
+  const when = data.day === 'Another day' ? data.date : data.day;
+  const subject = encodeURIComponent(`Callback request: ${data.service} (${data.urgency})`);
+  const body = encodeURIComponent(
+    `Name: ${data.name}\nPhone: ${data.phone}\nEmail: ${data.email || 'Not provided'}\nPostcode: ${data.postcode || 'Not provided'}\n` +
+    `Urgency: ${data.urgency}\nService: ${data.service}\nCall back: ${when}, ${data.time}\n\nDetails:\n${data.message || 'Not provided'}`
+  );
+  window.location.href = `mailto:${BUSINESS_EMAIL}?subject=${subject}&body=${body}`;
+  return 'mailto';
+}
+
+function phoneLooksValid(value) {
+  const digits = value.replace(/\D/g, '');
+  return digits.length >= 10 && digits.length <= 13;
+}
+
 function initContactForm() {
   const form = document.getElementById('contactForm');
   const note = document.getElementById('formNote');
@@ -104,8 +144,6 @@ function initContactForm() {
   // Where callback requests are sent. Set data-endpoint="" on the form to a
   // webhook URL (e.g. a Make.com webhook that texts/emails Kevin). While it's
   // empty, the form falls back to opening the visitor's email app, pre-filled.
-  const ENDPOINT = (form.dataset.endpoint || '').trim();
-  const BUSINESS_EMAIL = 'info@dunedinplumbing.co.uk';
 
   const success = document.getElementById('formSuccess');
   const successText = document.getElementById('formSuccessText');
@@ -171,9 +209,8 @@ function initContactForm() {
     // Required fields: flag for screen readers and focus the first problem.
     const name = form.elements.name;
     const phone = form.elements.phone;
-    const digits = phone.value.replace(/\D/g, '');
     const nameBad = !name.value.trim();
-    const phoneBad = digits.length < 10 || digits.length > 13;
+    const phoneBad = !phoneLooksValid(phone.value);
     name.setAttribute('aria-invalid', String(nameBad));
     phone.setAttribute('aria-invalid', String(phoneBad));
 
@@ -199,35 +236,140 @@ function initContactForm() {
       submitted_at: new Date().toISOString(),
     };
 
-    if (ENDPOINT) {
-      submitBtn.setAttribute('aria-busy', 'true');
-      submitBtn.disabled = true;
-      try {
-        const res = await fetch(ENDPOINT, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data),
-        });
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        form.reset();
-        showSuccess(data);
-        return;
-      } catch (err) {
-        // Fall through to the email fallback so the enquiry isn't lost.
-      } finally {
-        submitBtn.removeAttribute('aria-busy');
-        submitBtn.disabled = false;
-      }
+    submitBtn.setAttribute('aria-busy', 'true');
+    submitBtn.disabled = true;
+    const result = await deliverLead(data);
+    submitBtn.removeAttribute('aria-busy');
+    submitBtn.disabled = false;
+    if (result === 'sent') {
+      form.reset();
+      showSuccess(data);
+      return;
+    }
+    note.textContent = 'Your email app should now be open with your request filled in — just press send.';
+  });
+}
+
+function initQuickForm() {
+  const form = document.getElementById('quickForm');
+  const note = document.getElementById('quickNote');
+  if (!form || !note) return;
+  const btn = form.querySelector('button[type="submit"]');
+
+  form.addEventListener('input', (event) => {
+    if (event.target.getAttribute('aria-invalid') === 'true' && event.target.value.trim()) {
+      event.target.setAttribute('aria-invalid', 'false');
+    }
+  });
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    note.textContent = '';
+    note.classList.remove('is-error');
+    const name = form.elements.name;
+    const phone = form.elements.phone;
+
+    if (form.elements.company.value) return; // spam trap
+
+    const nameBad = !name.value.trim();
+    const phoneBad = !phoneLooksValid(phone.value);
+    name.setAttribute('aria-invalid', String(nameBad));
+    phone.setAttribute('aria-invalid', String(phoneBad));
+    if (nameBad || phoneBad) {
+      note.textContent = nameBad
+        ? 'Please add your name so Kevin knows who he’s calling.'
+        : 'Please check your phone number — it looks a digit or two short.';
+      note.classList.add('is-error');
+      (nameBad ? name : phone).focus();
+      return;
     }
 
-    const when = data.day === 'Another day' ? data.date : data.day;
-    const subject = encodeURIComponent(`Callback request: ${data.service} (${data.urgency})`);
-    const body = encodeURIComponent(
-      `Name: ${data.name}\nPhone: ${data.phone}\nEmail: ${data.email || 'Not provided'}\nPostcode: ${data.postcode || 'Not provided'}\n` +
-      `Urgency: ${data.urgency}\nService: ${data.service}\nCall back: ${when}, ${data.time}\n\nDetails:\n${data.message || 'Not provided'}`
-    );
-    window.location.href = `mailto:${BUSINESS_EMAIL}?subject=${subject}&body=${body}`;
-    note.textContent = 'Your email app should now be open with your request filled in — just press send.';
+    const data = {
+      name: name.value.trim(), phone: phone.value.trim(), email: '', postcode: '',
+      urgency: 'Not specified (quick request)', service: form.elements.service.value,
+      day: 'Today', date: '', time: 'Any time', message: '',
+      page: window.location.pathname, source: 'hero quick bar',
+      submitted_at: new Date().toISOString(),
+    };
+
+    btn.setAttribute('aria-busy', 'true');
+    btn.disabled = true;
+    const result = await deliverLead(data);
+    btn.removeAttribute('aria-busy');
+    btn.disabled = false;
+
+    if (result === 'sent') {
+      const done = document.createElement('div');
+      done.className = 'quick-done';
+      done.setAttribute('tabindex', '-1');
+      done.innerHTML = '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="currentColor"/><path d="M7.5 12.5l3 3 6-6.5" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><p></p>';
+      done.querySelector('p').textContent =
+        `Thanks ${data.name.split(' ')[0]} — Kevin will call you back shortly on ${data.phone}.`;
+      form.replaceChildren(done);
+      done.focus();
+    } else {
+      note.textContent = 'Your email app should now be open with your request filled in — just press send.';
+    }
+  });
+}
+
+function initCarousels() {
+  document.querySelectorAll('[data-carousel]').forEach((carousel) => {
+    const track = carousel.querySelector('.carousel-track');
+    const prev = carousel.querySelector('.carousel-prev');
+    const next = carousel.querySelector('.carousel-next');
+    const dotsWrap = carousel.querySelector('.carousel-dots');
+    if (!track) return;
+    const items = Array.from(track.children);
+    const behavior = PREFERS_REDUCED_MOTION ? 'auto' : 'smooth';
+
+    const pageWidth = () => {
+      const first = items[0];
+      const gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+      const perView = Math.max(1, Math.round((track.clientWidth + gap) / (first.offsetWidth + gap)));
+      return { step: (first.offsetWidth + gap) * perView, perView, itemStep: first.offsetWidth + gap };
+    };
+
+    let dots = [];
+    const buildDots = () => {
+      if (!dotsWrap) return;
+      const { perView } = pageWidth();
+      const pages = Math.max(1, Math.ceil(items.length / perView));
+      dotsWrap.replaceChildren();
+      dots = Array.from({ length: pages }, () => dotsWrap.appendChild(document.createElement('span')));
+    };
+
+    const update = () => {
+      const max = track.scrollWidth - track.clientWidth - 2;
+      if (prev) prev.disabled = track.scrollLeft <= 2;
+      if (next) next.disabled = track.scrollLeft >= max;
+      if (dots.length) {
+        const { step } = pageWidth();
+        const atEnd = track.scrollLeft >= max;
+        const idx = atEnd ? dots.length - 1 : Math.round(track.scrollLeft / step);
+        dots.forEach((d, i) => d.classList.toggle('is-active', i === idx));
+      }
+      // Off-screen cards shouldn't be tab stops until scrolled into view.
+      const left = track.scrollLeft, right = left + track.clientWidth;
+      items.forEach((item) => {
+        const visible = item.offsetLeft + item.offsetWidth / 2 >= left && item.offsetLeft + item.offsetWidth / 2 <= right;
+        item.querySelectorAll('a, button').forEach((el) => {
+          if (visible) el.removeAttribute('tabindex'); else el.setAttribute('tabindex', '-1');
+        });
+      });
+    };
+
+    prev && prev.addEventListener('click', () => track.scrollBy({ left: -pageWidth().step, behavior }));
+    next && next.addEventListener('click', () => track.scrollBy({ left: pageWidth().step, behavior }));
+
+    let ticking = false;
+    track.addEventListener('scroll', () => {
+      if (!ticking) { requestAnimationFrame(() => { update(); ticking = false; }); ticking = true; }
+    }, { passive: true });
+    window.addEventListener('resize', () => { buildDots(); update(); });
+
+    buildDots();
+    update();
   });
 }
 
@@ -250,6 +392,8 @@ function initScrollReveal() {
     '.hero-panel',
     '.includes-grid li',
     '.process-step',
+    '.step',
+    '.about-media',
     '.img-placeholder',
     '.services-cta',
     '.areas-list',

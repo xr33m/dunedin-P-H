@@ -19,7 +19,7 @@
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <script type="application/ld+json">
 {
@@ -113,7 +113,7 @@
 
     <nav class="main-nav" id="mainNav" aria-label="Primary">
       <a href="#services">Services</a>
-      <a href="#why-us">Why Us</a>
+      <a href="#why-us">How It Works</a>
       <a href="#reviews">Reviews</a>
       <a href="#areas">Areas We Cover</a>
       <a href="#contact">Contact</a>
@@ -135,282 +135,260 @@
 <main id="main">
 
   <!-- Hero -->
-  <section class="hero" id="top">
+  <section class="hero hero-v2" id="top">
     <div class="hero-decor" aria-hidden="true"></div>
     <div class="container hero-inner">
       <div class="hero-copy">
-        <p class="eyebrow">Edinburgh &amp; The Lothians</p>
+        <p class="chip chip-dark"><span class="chip-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M12 3s-6 7-6 11a6 6 0 0 0 12 0c0-4-6-11-6-11Z" fill="currentColor"/></svg></span>Plumbers in Edinburgh &amp; the Lothians</p>
         <h1>No cowboys. No vanishing invoices. No surprises on the bill.</h1>
+        <ul class="hero-usps">
+          <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M12 21s-7-5.6-7-11a7 7 0 0 1 14 0c0 5.4-7 11-7 11Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.5" stroke="currentColor" stroke-width="1.8"/></svg><span>Local, named plumber</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.8"/><path d="M12 7.5V12l3 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span>Same-day for most jobs</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M3.5 12.5V4.5a1 1 0 0 1 1-1h8l8 8-9 9-8-8Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="8.5" cy="8.5" r="1.5" fill="currentColor"/></svg><span>Price agreed upfront</span></li>
+        </ul>
         <p class="hero-lead">
-          Too many Edinburgh plumbers show up late, quote one price and charge another, or
-          disappear halfway through the job. Dunedin Plumbing &amp; Heating is built to be the
-          opposite — a named, accountable team with a five-star record, pricing agreed before
-          we start, and work that's still standing years later.
+          A named, accountable team with a five-star record — on time, honest about the options,
+          and priced before a single tool comes out.
         </p>
         <div class="hero-actions">
-          <a href="tel:+447400847374" class="btn btn-primary btn-lg">Call Now — 07400 847374</a>
-          <a href="#contact" class="btn btn-ghost btn-lg">Book a Callback</a>
+          <a href="#contact" class="btn btn-primary btn-lg">Book a Callback <svg class="arrow-ne" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a href="tel:+447400847374" class="btn btn-white btn-lg"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1.1-.3 1.2.4 2.5.6 3.8.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.5 21 3 13.5 3 4.7c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.6.6 3.8.1.4 0 .8-.3 1.1L6.6 10.8Z" fill="currentColor"/></svg><span>07400 847374</span></a>
         </div>
-        <ul class="hero-trust">
-          <li><span class="stars" aria-hidden="true">★★★★★</span> 5.0 rating · 25 Google reviews</li>
-          <li>Price agreed before we start — always</li>
-          <li>24-hour emergency call-outs</li>
-        </ul>
+        <div class="rating-badge">
+          <span class="rating-score">5.0</span>
+          <span class="rating-meta">
+            <span class="stars" aria-hidden="true">★★★★★</span>
+            <span>25 Google reviews</span>
+          </span>
+        </div>
       </div>
 
-      <div class="hero-panel" aria-hidden="true">
-        <div class="hero-card">
-          <div class="hero-card-row">
-            <span class="hero-card-label">Google Rating</span>
-            <span class="hero-card-value"><span data-count-to="5.0">5.0</span> <span class="stars small" aria-hidden="true">★★★★★</span></span>
+      <div class="hero-media">
+        <div class="hero-ring" aria-hidden="true"></div>
+        <div class="img-placeholder hero-photo">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M4 7h3l2-3h6l2 3h3a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="13" r="3.5" stroke="currentColor" stroke-width="1.6"/></svg>
+            <span>Photo: Kevin with the Dunedin van</span>
           </div>
-          <div class="hero-card-row">
-            <span class="hero-card-label">Reviews</span>
-            <span class="hero-card-value"><span data-count-to="25" data-suffix=" on Google">25 on Google</span></span>
-          </div>
-          <div class="hero-card-row">
-            <span class="hero-card-label">Availability</span>
-            <span class="hero-card-value">Open 24 hours</span>
-          </div>
-          <div class="hero-card-row">
-            <span class="hero-card-label">Response</span>
-            <span class="hero-card-value">Same-day, most jobs</span>
-          </div>
+        <div class="hero-float" aria-hidden="true">
+          <strong>24/7</strong><span>Emergency<br>call-outs</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Trust bar -->
-  <section class="trust-bar" aria-label="Why customers choose us">
-    <div class="container trust-bar-inner">
-      <div class="trust-item">
-        <strong>5.0★</strong>
-        <span>25 Google reviews</span>
-      </div>
-      <div class="trust-item">
-        <strong>24/7</strong>
-        <span>Emergency call-outs</span>
-      </div>
-      <div class="trust-item">
-        <strong>Fixed</strong>
-        <span>Price agreed before we start</span>
-      </div>
-      <div class="trust-item">
-        <strong>Local</strong>
-        <span>Named plumber, no call centre</span>
-      </div>
-      <!-- Add once confirmed by Kevin: public liability insurance, workmanship
-           guarantee (length), payment methods accepted. -->
+  <!-- Quick callback bar -->
+  <section class="quick-bar-wrap" aria-labelledby="quickBarTitle">
+    <div class="container">
+      <form class="quick-bar" id="quickForm" novalidate>
+        <div class="quick-bar-head">
+          <h2 id="quickBarTitle">Request a callback</h2>
+          <ul class="quick-ticks">
+            <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10" fill="currentColor"/><path d="M7.5 12.5l3 3 6-6.5" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>No obligation</li>
+            <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10" fill="currentColor"/><path d="M7.5 12.5l3 3 6-6.5" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Fast response</li>
+            <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10" fill="currentColor"/><path d="M7.5 12.5l3 3 6-6.5" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Price agreed first</li>
+          </ul>
+        </div>
+        <div class="quick-fields">
+          <div class="quick-field">
+            <label for="qName" class="sr-only">Name</label>
+            <input type="text" id="qName" name="name" placeholder="Name" autocomplete="name" required>
+          </div>
+          <div class="quick-field">
+            <label for="qPhone" class="sr-only">Phone number</label>
+            <input type="tel" id="qPhone" name="phone" placeholder="Phone number" autocomplete="tel" inputmode="tel" required>
+          </div>
+          <div class="quick-field">
+            <label for="qService" class="sr-only">What do you need?</label>
+            <select id="qService" name="service">
+              <option value="Something else">What do you need?</option>
+              <option value="Emergency plumbing">Emergency plumbing</option>
+              <option value="Bathroom renovation">Bathroom renovation</option>
+              <option value="Tap repair or installation">Tap repair or installation</option>
+              <option value="Water heater installation or repair">Water heater</option>
+              <option value="Radiators &amp; heating">Radiators &amp; heating</option>
+              <option value="Water line repair">Water line repair</option>
+              <option value="Lead pipe replacement">Lead pipe replacement</option>
+            </select>
+          </div>
+          <div class="quick-field hp-field" aria-hidden="true">
+            <label for="qCompany">Leave this empty</label>
+            <input type="text" id="qCompany" name="company" tabindex="-1" autocomplete="off">
+          </div>
+          <button type="submit" class="btn btn-primary">Call me back <svg class="arrow-ne" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
+        <p class="form-note quick-note" id="quickNote" role="status" aria-live="polite"></p>
+      </form>
     </div>
   </section>
 
   <!-- Services -->
   <section class="section" id="services">
     <div class="container">
-      <div class="section-head">
-        <p class="eyebrow">What We Do</p>
-        <h2>Plumbing &amp; heating services, done properly</h2>
-        <p class="section-lead">
-          From a dripping tap to a full heating system upgrade, every job gets the same level of
-          care — clear communication, tidy work, and a price you agreed to before we start.
-        </p>
-      </div>
-
-      <div class="services-grid">
-
-        <article class="service-card">
-          <div class="service-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M12 2v6m0 0-3 3m3-3 3 3M5 12a7 7 0 0 0 14 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 21h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-          </div>
-          <h3>Lead Pipe Replacement</h3>
-          <p>Original lead supply pipes, common in Edinburgh's older tenements, replaced safely.</p>
-          <ul>
-            <li>Lead pipe identification</li>
-            <li>Full &amp; partial replacement</li>
-            <li>Shared supply coordination</li>
-          </ul>
-          <a href="services/lead-replacement/" class="service-link">Learn more<span class="sr-only"> about Lead Pipe Replacement</span> →</a>
-        </article>
-
-        <article class="service-card">
-          <div class="service-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M12 3c-1.7 2-3 4.2-3 6.4A3 3 0 0 0 12 12a3 3 0 0 0 3-2.6C15 7.2 13.7 5 12 3Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M6 14a6 6 0 0 0 12 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M4 21h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-          </div>
-          <h3>Radiator Maintenance</h3>
-          <p>Balanced, bled and repaired radiators so every room heats evenly.</p>
-          <ul>
-            <li>Bleeding &amp; balancing</li>
-            <li>Repair &amp; replacement</li>
-            <li>Powerflushing</li>
-          </ul>
-          <a href="services/radiator-maintenance/" class="service-link">Learn more<span class="sr-only"> about Radiator Maintenance</span> →</a>
-        </article>
-
-        <article class="service-card">
-          <div class="service-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><rect x="5" y="3" width="14" height="18" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M9 8h6M9 12h6M9 16h3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-          </div>
-          <h3>Gas Boiler Servicing</h3>
-          <p>Annual servicing and fault repair to keep your boiler safe and efficient.</p>
-          <ul>
-            <li>Annual servicing</li>
-            <li>Fault diagnosis &amp; repair</li>
-            <li>Safety &amp; efficiency checks</li>
-          </ul>
-          <a href="services/gas-boiler-servicing/" class="service-link">Learn more<span class="sr-only"> about Gas Boiler Servicing</span> →</a>
-        </article>
-
-        <article class="service-card">
-          <div class="service-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M4 12h16M6 12V6a2 2 0 0 1 2-2h3M6 12v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="17" r="1" fill="currentColor"/></svg>
-          </div>
-          <h3>Water Line Repair</h3>
-          <p>Degrading mains and internal supply lines repaired quickly and safely.</p>
-          <ul>
-            <li>Mains pipe repair</li>
-            <li>Leak detection</li>
-            <li>Emergency call-outs</li>
-          </ul>
-          <a href="services/water-line-repair/" class="service-link">Learn more<span class="sr-only"> about Water Line Repair</span> →</a>
-        </article>
-
-        <article class="service-card">
-          <div class="service-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M3 21V9l9-6 9 6v12" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 21v-7h6v7" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
-          </div>
-          <h3>Bathroom Renovations</h3>
-          <p>From a single fixture swap to a complete refit, designed and fitted end to end.</p>
-          <ul>
-            <li>Full bathroom renovations</li>
-            <li>Shower &amp; toilet installation</li>
-            <li>Tap installation &amp; repair</li>
-          </ul>
-          <a href="services/bathroom-renovations/" class="service-link">Learn more<span class="sr-only"> about Bathroom Renovations</span> →</a>
-        </article>
-
-        <article class="service-card">
-          <div class="service-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M12 2v4M4.9 4.9l2.8 2.8M2 12h4m-2.9 7.1 2.8-2.8M12 18v4m5.3-2.9-2.8-2.8M22 12h-4m2.9-7.1-2.8 2.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.8"/></svg>
-          </div>
-          <h3>Tap Repair &amp; Installation</h3>
-          <p>Dripping taps, worn valves or a full kitchen refit — fitted properly, first time.</p>
-          <ul>
-            <li>Kitchen &amp; bathroom taps</li>
-            <li>New tap installation</li>
-            <li>Indoor &amp; outdoor taps</li>
-          </ul>
-          <a href="services/tap-repair-installation/" class="service-link">Learn more<span class="sr-only"> about Tap Repair &amp; Installation</span> →</a>
-        </article>
-
-        <article class="service-card">
-          <div class="service-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
-          </div>
-          <h3>Water Heater Installation &amp; Repairs</h3>
-          <p>Reliable hot water, whatever system your home runs on.</p>
-          <ul>
-            <li>Water heater installation</li>
-            <li>Repair &amp; servicing</li>
-            <li>Water tank install &amp; repair</li>
-          </ul>
-          <a href="services/water-heater-installation-repair/" class="service-link">Learn more<span class="sr-only"> about Water Heater Installation &amp; Repairs</span> →</a>
-        </article>
-
-      </div>
-
-      <div class="services-cta">
-        <p>Not sure which service you need? Tell us what's wrong and we'll take it from there.</p>
-        <a href="tel:+447400847374" class="btn btn-primary">Call 07400 847374</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Why Us -->
-  <section class="section section-alt" id="why-us">
-    <div class="container">
-      <div class="section-head">
-        <p class="eyebrow">Why Homeowners Choose Us</p>
-        <h2>The cowboy-plumber problem, solved</h2>
-        <p class="section-lead">Every point below exists because someone told us about the plumber who didn't do it.</p>
-      </div>
-
-      <div class="why-grid">
-        <div class="why-card">
-          <div class="why-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
-          </div>
-          <h3>We turn up. Every time.</h3>
-          <p>Same-day for most jobs, 24 hours for genuine emergencies — no "running late" with no call.</p>
+      <div class="section-head section-head-split">
+        <div>
+          <p class="chip"><span class="chip-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M12 3s-6 7-6 11a6 6 0 0 0 12 0c0-4-6-11-6-11Z" fill="currentColor"/></svg></span>Plumbing services</p>
+          <h2>Top-rated plumbing across Edinburgh</h2>
         </div>
-        <div class="why-card">
-          <div class="why-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M12 3 4 6v6c0 5 3.4 8.7 8 9 4.6-.3 8-4 8-9V6l-8-3Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <a href="#areas" class="btn btn-outline">Areas we cover <svg class="arrow-ne" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+
+      <div class="carousel" data-carousel>
+        <div class="carousel-track" role="list" aria-label="Our services">
+          <article class="svc-card" role="listitem">
+            <div class="img-placeholder svc-photo">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M4 7h3l2-3h6l2 3h3a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="13" r="3.5" stroke="currentColor" stroke-width="1.6"/></svg>
+            <span>Photo: Lead Pipe Replacement</span>
           </div>
-          <h3>One price. Agreed first.</h3>
-          <p>You'll know the cost before a single tool comes out — not after the job's half done.</p>
+            <div class="svc-panel">
+              <div class="svc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M12 2v6m0 0-3 3m3-3 3 3M5 12a7 7 0 0 0 14 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 21h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+              <h3>Lead Pipe Replacement</h3>
+              <p>Original lead supply pipes, common in Edinburgh's older tenements, replaced safely.</p>
+              <a href="services/lead-replacement/" class="service-link">Learn more<span class="sr-only"> about Lead Pipe Replacement</span> <svg class="arrow-ne" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            </div>
+          </article>
+          <article class="svc-card" role="listitem">
+            <div class="img-placeholder svc-photo">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M4 7h3l2-3h6l2 3h3a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="13" r="3.5" stroke="currentColor" stroke-width="1.6"/></svg>
+            <span>Photo: Radiator Maintenance</span>
+          </div>
+            <div class="svc-panel">
+              <div class="svc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M12 3c-1.7 2-3 4.2-3 6.4A3 3 0 0 0 12 12a3 3 0 0 0 3-2.6C15 7.2 13.7 5 12 3Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M6 14a6 6 0 0 0 12 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M4 21h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+              <h3>Radiator Maintenance</h3>
+              <p>Balanced, bled and repaired radiators so every room heats evenly.</p>
+              <a href="services/radiator-maintenance/" class="service-link">Learn more<span class="sr-only"> about Radiator Maintenance</span> <svg class="arrow-ne" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            </div>
+          </article>
+          <article class="svc-card" role="listitem">
+            <div class="img-placeholder svc-photo">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M4 7h3l2-3h6l2 3h3a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="13" r="3.5" stroke="currentColor" stroke-width="1.6"/></svg>
+            <span>Photo: Gas Boiler Servicing</span>
+          </div>
+            <div class="svc-panel">
+              <div class="svc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><rect x="5" y="3" width="14" height="18" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M9 8h6M9 12h6M9 16h3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+              <h3>Gas Boiler Servicing</h3>
+              <p>Annual servicing and fault repair to keep your boiler safe and efficient.</p>
+              <a href="services/gas-boiler-servicing/" class="service-link">Learn more<span class="sr-only"> about Gas Boiler Servicing</span> <svg class="arrow-ne" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            </div>
+          </article>
+          <article class="svc-card" role="listitem">
+            <div class="img-placeholder svc-photo">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M4 7h3l2-3h6l2 3h3a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="13" r="3.5" stroke="currentColor" stroke-width="1.6"/></svg>
+            <span>Photo: Water Line Repair</span>
+          </div>
+            <div class="svc-panel">
+              <div class="svc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M4 12h16M6 12V6a2 2 0 0 1 2-2h3M6 12v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="17" r="1" fill="currentColor"/></svg></div>
+              <h3>Water Line Repair</h3>
+              <p>Degrading mains and internal supply lines repaired quickly and safely.</p>
+              <a href="services/water-line-repair/" class="service-link">Learn more<span class="sr-only"> about Water Line Repair</span> <svg class="arrow-ne" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            </div>
+          </article>
+          <article class="svc-card" role="listitem">
+            <div class="img-placeholder svc-photo">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M4 7h3l2-3h6l2 3h3a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="13" r="3.5" stroke="currentColor" stroke-width="1.6"/></svg>
+            <span>Photo: Bathroom Renovations</span>
+          </div>
+            <div class="svc-panel">
+              <div class="svc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M3 21V9l9-6 9 6v12" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 21v-7h6v7" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
+              <h3>Bathroom Renovations</h3>
+              <p>From a single fixture swap to a complete refit, designed and fitted end to end.</p>
+              <a href="services/bathroom-renovations/" class="service-link">Learn more<span class="sr-only"> about Bathroom Renovations</span> <svg class="arrow-ne" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            </div>
+          </article>
+          <article class="svc-card" role="listitem">
+            <div class="img-placeholder svc-photo">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M4 7h3l2-3h6l2 3h3a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="13" r="3.5" stroke="currentColor" stroke-width="1.6"/></svg>
+            <span>Photo: Tap Repair &amp; Installation</span>
+          </div>
+            <div class="svc-panel">
+              <div class="svc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M12 2v4M4.9 4.9l2.8 2.8M2 12h4m-2.9 7.1 2.8-2.8M12 18v4m5.3-2.9-2.8-2.8M22 12h-4m2.9-7.1-2.8 2.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.8"/></svg></div>
+              <h3>Tap Repair &amp; Installation</h3>
+              <p>Dripping taps, worn valves or a full kitchen refit — fitted properly, first time.</p>
+              <a href="services/tap-repair-installation/" class="service-link">Learn more<span class="sr-only"> about Tap Repair &amp; Installation</span> <svg class="arrow-ne" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            </div>
+          </article>
+          <article class="svc-card" role="listitem">
+            <div class="img-placeholder svc-photo">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M4 7h3l2-3h6l2 3h3a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="13" r="3.5" stroke="currentColor" stroke-width="1.6"/></svg>
+            <span>Photo: Water Heater Installation &amp; Repairs</span>
+          </div>
+            <div class="svc-panel">
+              <div class="svc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
+              <h3>Water Heater Installation &amp; Repairs</h3>
+              <p>Reliable hot water, whatever system your home runs on.</p>
+              <a href="services/water-heater-installation-repair/" class="service-link">Learn more<span class="sr-only"> about Water Heater Installation &amp; Repairs</span> <svg class="arrow-ne" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            </div>
+          </article>
         </div>
-        <div class="why-card">
-          <div class="why-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M4 12h16M4 12a8 8 0 0 1 8-8m-8 8a8 8 0 0 0 8 8m8-8a8 8 0 0 1-8 8m8-8a8 8 0 0 0-8-8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-          </div>
-          <h3>We leave it as we found it</h3>
-          <p>Dust sheets down, mess cleared, minimum disruption — like we're the ones living there.</p>
-        </div>
-        <div class="why-card">
-          <div class="why-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M12 21s-7-4.5-9.3-9A5.4 5.4 0 0 1 12 6.3 5.4 5.4 0 0 1 21.3 12c-2.3 4.5-9.3 9-9.3 9Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
-          </div>
-          <h3>A named team, not a stranger</h3>
-          <p>Kevin and the team are based in Edinburgh and reachable long after the invoice is paid.</p>
+        <div class="carousel-controls">
+          <button type="button" class="carousel-btn carousel-prev" aria-label="Previous services"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="carousel-dots" aria-hidden="true"></div>
+          <button type="button" class="carousel-btn carousel-next" aria-label="More services"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         </div>
       </div>
     </div>
   </section>
 
   <!-- About -->
-  <section class="section about" id="about">
-    <div class="container about-inner">
+  <section class="section section-alt about-v2" id="about">
+    <div class="container about-split">
+      <div class="about-media">
+        <div class="img-placeholder about-photo">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M4 7h3l2-3h6l2 3h3a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="13" r="3.5" stroke="currentColor" stroke-width="1.6"/></svg>
+            <span>Photo: Kevin on a job in Edinburgh</span>
+          </div>
+        <div class="stat-chips">
+          <div class="stat-chip"><strong>5.0★</strong><span>Google rating</span></div>
+          <div class="stat-chip"><strong>25</strong><span>Five-star reviews</span></div>
+        </div>
+      </div>
       <div class="about-copy">
-        <p class="eyebrow">About Dunedin Plumbing &amp; Heating</p>
+        <p class="chip"><span class="chip-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M12 3s-6 7-6 11a6 6 0 0 0 12 0c0-4-6-11-6-11Z" fill="currentColor"/></svg></span>About Dunedin Plumbing &amp; Heating</p>
         <h2>We didn't grow by advertising. We grew by turning up.</h2>
         <p>
           Dunedin Plumbing &amp; Heating has never relied on big marketing spend — it grew because
           people who used us once called us again, for the next tap, the next radiator, the next
-          renovation. That's the whole model: turn up when we say we will, explain the options
-          honestly, and price the work once, upfront.
+          renovation. Turn up when we say we will, explain the options honestly, and price the
+          work once, upfront.
         </p>
         <p>
-          One of the jobs that best sums us up wasn't a big one — it was a shared mains pipe
-          degrading in a tenement close, serving several flats at once. Instead of picking a
-          price and hoping nobody asked questions, we walked every household through the options
-          together, agreed a fair cost everyone could see, and got the water back on with as
-          little disruption as possible. That's the standard, whether it's one leaking tap or a
-          full renovation: explain it straight, price it honestly, finish what we start.
+          One job that sums us up: a shared mains pipe failing in a tenement close, serving several
+          flats at once. We walked every household through the options together, agreed a fair cost
+          everyone could see, and got the water back on with as little disruption as possible.
         </p>
-        <div class="about-stats">
-          <div>
-            <strong><span data-count-to="5.0" data-suffix="★">5.0★</span></strong>
-            <span>Average Google rating</span>
-          </div>
-          <div>
-            <strong><span data-count-to="25">25</span></strong>
-            <span>Five-star customer reviews</span>
-          </div>
-          <div>
-            <strong>24/7</strong>
-            <span>Emergency availability</span>
-          </div>
-        </div>
+        <a href="tel:+447400847374" class="btn btn-primary btn-lg"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1.1-.3 1.2.4 2.5.6 3.8.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.5 21 3 13.5 3 4.7c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.6.6 3.8.1.4 0 .8-.3 1.1L6.6 10.8Z" fill="currentColor"/></svg><span>07400 847374</span></a>
       </div>
-      <div class="about-quote">
-        <blockquote>
-          "Kevin is an all-round stand-up guy, great at his job and great company too. Our shower
-          broke and within the next day he was round and had it fixed up perfectly. Highly
-          recommend."
-        </blockquote>
-        <cite>— Alice Ratcliff, Google Review</cite>
+    </div>
+  </section>
+
+  <!-- How it works (Why Us) -->
+  <section class="section" id="why-us">
+    <div class="container">
+      <div class="section-head">
+        <p class="chip"><span class="chip-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M12 3s-6 7-6 11a6 6 0 0 0 12 0c0-4-6-11-6-11Z" fill="currentColor"/></svg></span>How it works</p>
+        <h2>Simple, honest plumbing — start to finish</h2>
       </div>
+      <ol class="steps">
+        <li class="step">
+          <span class="step-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1.1-.3 1.2.4 2.5.6 3.8.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.5 21 3 13.5 3 4.7c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.6.6 3.8.1.4 0 .8-.3 1.1L6.6 10.8Z" fill="currentColor"/></svg></span>
+          <h3><span class="step-num">1.</span> Call or book online</h3>
+          <p>Ring 07400 847374 — open 24 hours — or book a callback at a time that suits you. Kevin answers, not a call centre.</p>
+        </li>
+        <li class="step">
+          <span class="step-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><rect x="3.5" y="5" width="17" height="15.5" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M3.5 10h17M8 3v4M16 3v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+          <h3><span class="step-num">2.</span> On time, problem explained</h3>
+          <p>We turn up when we said we would, find the cause, and talk you through the options in plain English.</p>
+        </li>
+        <li class="step">
+          <span class="step-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M12 3 4 6v6c0 5 3.4 8.7 8 9 4.6-.3 8-4 8-9V6l-8-3Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <h3><span class="step-num">3.</span> One price, agreed first</h3>
+          <p>You get a clear price before any work starts. You ask questions, we answer. No surprises on the bill.</p>
+        </li>
+        <li class="step">
+          <span class="step-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M14.5 6.5a4 4 0 0 0 5 5L12 19a2.1 2.1 0 0 1-3-3l7.5-7.5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M5 5l4 4M3.5 6.5l3-3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+          <h3><span class="step-num">4.</span> Done properly, left tidy</h3>
+          <p>Dust sheets down, the job finished right, mess cleared away — and we're still reachable long after.</p>
+        </li>
+      </ol>
     </div>
   </section>
 
@@ -452,105 +430,88 @@
   </section>
 
   <!-- Reviews -->
-  <section class="section section-alt" id="reviews">
+  <section class="section testimonials" id="reviews">
     <div class="container">
       <div class="section-head">
-        <p class="eyebrow">Reputation</p>
-        <h2>What Edinburgh customers are saying</h2>
-        <p class="section-lead">
-          <span class="stars" aria-hidden="true">★★★★★</span>
-          5.0 out of 5, from 25 reviews on Google.
-        </p>
+        <p class="chip chip-dark"><span class="chip-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M12 3s-6 7-6 11a6 6 0 0 0 12 0c0-4-6-11-6-11Z" fill="currentColor"/></svg></span>Testimonials</p>
+        <h2>25 five-star reviews from Edinburgh customers</h2>
       </div>
-
-      <div class="reviews-grid">
-        <article class="review-card">
-          <div class="review-stars" aria-hidden="true">★★★★★</div>
-          <p>"I'm a landlord with several properties and have been using Kevin from Dunedin Plumbing
-          for a couple of years now. He's an exceptionally good plumber — reliable, turns up on
-          time, doesn't overcharge, and always leaves the property clean and tidy. It's nice having
-          someone you can trust to get the job done properly."</p>
-          <div class="review-author">
-            <span class="avatar" aria-hidden="true">MM</span>
-            <div>
+      <div class="carousel" data-carousel>
+        <div class="carousel-track" role="list" aria-label="Customer reviews">
+          <article class="t-card" role="listitem">
+            <div class="t-head">
+              <span class="t-avatar" aria-hidden="true">MM</span>
               <strong>Margaret Miller</strong>
-              <span>Google Review</span>
             </div>
-          </div>
-        </article>
-
-        <article class="review-card">
-          <div class="review-stars" aria-hidden="true">★★★★★</div>
-          <p>"We had a sudden burst pipe late at night and called Dunedin Plumbing and Heating. They
-          responded incredibly fast — Kevin was at our door within the hour. He identified the issue
-          right away, explained the fix clearly, and had everything sorted in no time. The pricing
-          was completely fair with no hidden fees."</p>
-          <div class="review-author">
-            <span class="avatar" aria-hidden="true">GP</span>
-            <div>
+            <p>"I'm a landlord with several properties and have been using Kevin from Dunedin Plumbing for a couple of years now. He's an exceptionally good plumber — reliable, turns up on time, doesn't overcharge, and always leaves the property clean and tidy. It's nice having someone you can trust to get the job done properly."</p>
+            <div class="t-foot">
+              <span>Google review</span>
+              <span class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</span>
+            </div>
+          </article>
+          <article class="t-card" role="listitem">
+            <div class="t-head">
+              <span class="t-avatar" aria-hidden="true">GP</span>
               <strong>Gabriela Popova</strong>
-              <span>Google Review</span>
             </div>
-          </div>
-        </article>
-
-        <article class="review-card">
-          <div class="review-stars" aria-hidden="true">★★★★★</div>
-          <p>"My downstairs neighbour complained that water was coming through their bedroom ceiling
-          at 6pm. Kevin attended within 2 hours, investigated, and traced the leak back to my
-          neighbour's own water tank — isolating the issue so they had time to contact their
-          landlord. A great, reliable plumber, even if his jokes are mince."</p>
-          <div class="review-author">
-            <span class="avatar" aria-hidden="true">FG</span>
-            <div>
+            <p>"We had a sudden burst pipe late at night and called Dunedin Plumbing and Heating. They responded incredibly fast — Kevin was at our door within the hour. He identified the issue right away, explained the fix clearly, and had everything sorted in no time. The pricing was completely fair with no hidden fees."</p>
+            <div class="t-foot">
+              <span>Google review</span>
+              <span class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</span>
+            </div>
+          </article>
+          <article class="t-card" role="listitem">
+            <div class="t-head">
+              <span class="t-avatar" aria-hidden="true">FG</span>
               <strong>Frank Galbraith</strong>
-              <span>Google Review</span>
             </div>
-          </div>
-        </article>
-
-        <article class="review-card">
-          <div class="review-stars" aria-hidden="true">★★★★★</div>
-          <p>"Kevin and his team came and did a full bathroom refit. Very professional job — Kevin
-          was friendly and tidy throughout. Highly delighted with the finished result."</p>
-          <div class="review-author">
-            <span class="avatar" aria-hidden="true">MM</span>
-            <div>
+            <p>"My downstairs neighbour complained that water was coming through their bedroom ceiling at 6pm. Kevin attended within 2 hours, investigated, and traced the leak back to my neighbour's own water tank — isolating the issue so they had time to contact their landlord. A great, reliable plumber, even if his jokes are mince."</p>
+            <div class="t-foot">
+              <span>Google review</span>
+              <span class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</span>
+            </div>
+          </article>
+          <article class="t-card" role="listitem">
+            <div class="t-head">
+              <span class="t-avatar" aria-hidden="true">MM</span>
               <strong>Margaret Mckay</strong>
-              <span>Google Review</span>
             </div>
-          </div>
-        </article>
-
-        <article class="review-card">
-          <div class="review-stars" aria-hidden="true">★★★★★</div>
-          <p>"I had a non-urgent issue with a jammed sink plug and logged the details on the website
-          one evening. Kevin responded within the hour and arranged a visit the next day to suit my
-          schedule, updated me before arriving, and got everything sorted quickly. Fast, polite,
-          very professional."</p>
-          <div class="review-author">
-            <span class="avatar" aria-hidden="true">MD</span>
-            <div>
+            <p>"Kevin and his team came and did a full bathroom refit. Very professional job — Kevin was friendly and tidy throughout. Highly delighted with the finished result."</p>
+            <div class="t-foot">
+              <span>Google review</span>
+              <span class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</span>
+            </div>
+          </article>
+          <article class="t-card" role="listitem">
+            <div class="t-head">
+              <span class="t-avatar" aria-hidden="true">MD</span>
               <strong>Martin Duffield-Fernandez</strong>
-              <span>Google Review</span>
             </div>
-          </div>
-        </article>
-
-        <article class="review-card">
-          <div class="review-stars" aria-hidden="true">★★★★★</div>
-          <p>"I've used Dunedin Plumbing many times over the years, often in emergency situations.
-          Kevin always responds immediately and provides a first-class service — and he's very
-          reasonably priced. Definitely five stars."</p>
-          <div class="review-author">
-            <span class="avatar" aria-hidden="true">AJ</span>
-            <div>
+            <p>"I had a non-urgent issue with a jammed sink plug and logged the details on the website one evening. Kevin responded within the hour and arranged a visit the next day to suit my schedule, updated me before arriving, and got everything sorted quickly. Fast, polite, very professional."</p>
+            <div class="t-foot">
+              <span>Google review</span>
+              <span class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</span>
+            </div>
+          </article>
+          <article class="t-card" role="listitem">
+            <div class="t-head">
+              <span class="t-avatar" aria-hidden="true">AJ</span>
               <strong>Andrew Jamieson</strong>
-              <span>Google Review</span>
             </div>
-          </div>
-        </article>
+            <p>"I've used Dunedin Plumbing many times over the years, often in emergency situations. Kevin always responds immediately and provides a first-class service — and he's very reasonably priced. Definitely five stars."</p>
+            <div class="t-foot">
+              <span>Google review</span>
+              <span class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</span>
+            </div>
+          </article>
+        </div>
+        <div class="carousel-controls">
+          <button type="button" class="carousel-btn carousel-prev" aria-label="Previous reviews"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="carousel-dots" aria-hidden="true"></div>
+          <button type="button" class="carousel-btn carousel-next" aria-label="More reviews"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
       </div>
+      <p class="t-summary"><strong>5.0</strong> <span class="stars" aria-hidden="true">★★★★★</span> 25 reviews on Google</p>
     </div>
   </section>
 
@@ -748,7 +709,7 @@
     <div class="footer-col">
       <h4>Quick Links</h4>
       <a href="#services">Services</a>
-      <a href="#why-us">Why Us</a>
+      <a href="#why-us">How It Works</a>
       <a href="#reviews">Reviews</a>
       <a href="#contact">Contact</a>
     </div>

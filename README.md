@@ -223,6 +223,26 @@ preview the site — the site itself is still plain HTML/CSS/JS.
       insurance, workmanship guarantee length, payment methods (slot is
       marked with a comment in the HTML).
 
+## Homepage redesign v2 ✅ DONE
+
+Layout patterns taken from a reference plumbing site (structure only —
+Dunedin's own brand colours, copy and claims):
+
+- [x] Condensed uppercase display headings (Barlow Condensed), chip-style
+      section badges, squarer buttons with ↗ arrows — applied site-wide
+- [x] Hero: badge, headline, 3 icon USPs, Book + phone buttons, Google
+      rating badge, large photo slot with ring + "24/7" tag
+- [x] "Request a callback" quick bar overlapping the hero (name, phone,
+      service) — sends through the same pipeline as the main form
+- [x] Services carousel: photo cards with white label panels and icon
+      badges, arrows, dots, swipe on mobile
+- [x] About split: photo with stat chips (5.0★ rating, 25 reviews)
+- [x] How it works: 4 connected steps (replaces the old Why Us grid;
+      nav label is now "How It Works")
+- [x] Testimonials: dark band review carousel with avatars and stars
+- [ ] Real photos for: hero (Kevin + van), each service card, about image
+- [ ] Optional: carry the hero/photo layout through to service and area pages
+
 ## Phase 5 — Analytics & Conversion Tracking *(suggested addition)*
 
 - [ ] GA4 or similar installed
