@@ -202,6 +202,27 @@ preview the site — the site itself is still plain HTML/CSS/JS.
 - `npm run build` → copies the site unchanged into `dist/` for deploys
   (publish directory: `dist`)
 
+## Conversion upgrades ✅ DONE (callback form + trust strip)
+
+- [x] **Callback booking form on every page** (homepage, all 7 service
+      pages, all 6 area pages) — urgency, service (pre-selected on service
+      pages), preferred day/date and time window, name, phone, optional
+      postcode/email/details. Emergency choice shows a "call now" prompt.
+      Validates phone numbers, flags errors for screen readers, has a
+      spam honeypot, and shows a confirmation with the chosen callback time.
+- [ ] **Connect the form to Kevin** — set `data-endpoint="…"` on
+      `#contactForm` to a webhook (e.g. Make.com → SMS via the Dunedin
+      Twilio number and/or email). Until then it falls back to opening
+      the visitor's email app pre-filled (the old behaviour). Payload is
+      JSON: name, phone, email, postcode, urgency, service, day, date,
+      time, message, page, submitted_at.
+- [x] **Trust strip on every page** — 5.0★ / 25 Google reviews, 24/7,
+      price agreed before we start, named plumber; reassurance line under
+      every submit button.
+- [ ] Add to the trust strip once Kevin confirms: public liability
+      insurance, workmanship guarantee length, payment methods (slot is
+      marked with a comment in the HTML).
+
 ## Phase 5 — Analytics & Conversion Tracking *(suggested addition)*
 
 - [ ] GA4 or similar installed

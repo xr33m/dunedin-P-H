@@ -1045,3 +1045,86 @@ svg { display: block; }
   width: 100%; height: 100%;
   object-fit: cover;
 }
+
+/* ==========================================================================
+   Callback booking form
+   ========================================================================== */
+.booking-form .form-intro { color: var(--text-muted); font-size: 0.92rem; margin: -12px 0 20px; }
+.form-group { border: 0; margin: 0 0 18px; padding: 0; min-width: 0; }
+.form-group legend {
+  font-size: 0.88rem; font-weight: 600; color: var(--navy-800);
+  margin-bottom: 8px; padding: 0;
+}
+.choice-grid { display: grid; gap: 8px; }
+.choice-grid-3 { grid-template-columns: repeat(3, 1fr); }
+.choice-grid-4 { grid-template-columns: repeat(4, 1fr); margin-top: 8px; }
+.choice { position: relative; display: block; cursor: pointer; }
+.choice input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.choice > span {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 2px; height: 100%;
+  padding: 11px 8px; text-align: center;
+  border: 1.5px solid var(--border); border-radius: var(--radius-sm);
+  background: var(--bg); color: var(--navy-800);
+  font-size: 0.9rem; font-weight: 600; line-height: 1.25;
+  transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+.choice > span strong { font-size: 0.95rem; }
+.choice small { font-size: 0.76rem; font-weight: 500; color: var(--text-muted); }
+.choice:hover > span { border-color: var(--teal-500); }
+.choice input:checked + span {
+  border-color: var(--teal-500);
+  background: rgba(27, 122, 140, 0.08);
+  box-shadow: inset 0 0 0 1px var(--teal-500);
+}
+.choice input:focus-visible + span { outline: 3px solid var(--teal-500); outline-offset: 2px; }
+.choice-compact > .choice > span { padding: 9px 6px; }
+
+.emergency-callout {
+  margin-top: 10px; padding: 14px 16px;
+  border-radius: var(--radius-sm);
+  background: var(--copper-100); border: 1px solid rgba(191, 74, 26, 0.25);
+}
+.emergency-callout p { margin: 0 0 10px; font-size: 0.9rem; color: var(--navy-900); }
+.emergency-callout .btn { padding: 10px 18px; font-size: 0.9rem; }
+.date-row { margin: 10px 0 0; }
+
+.form-split { display: grid; grid-template-columns: 1fr 1fr; gap: 0 14px; }
+.form-row .req { color: var(--copper-700); }
+.form-row .opt { font-weight: 500; color: var(--text-muted); }
+.hp-field { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+.form-trust {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 14px;
+  margin: 12px 0 0; font-size: 0.8rem; color: var(--text-muted);
+}
+.form-trust li { display: inline-flex; align-items: center; gap: 6px; }
+.form-trust li::before {
+  content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--teal-500);
+}
+.booking-form button[aria-busy="true"] { opacity: 0.7; cursor: progress; }
+
+.form-success {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 44px 36px; text-align: center;
+  box-shadow: var(--shadow-sm);
+}
+.form-success:focus { outline: none; }
+.form-success-icon {
+  width: 56px; height: 56px; margin: 0 auto 16px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(27, 122, 140, 0.12); color: var(--teal-500);
+}
+.form-success-icon svg { width: 28px; height: 28px; }
+.form-success p { color: var(--text-muted); }
+.form-success-small { font-size: 0.9rem; margin: 0; }
+.form-success-small a { color: var(--copper-700); font-weight: 700; }
+
+@media (max-width: 520px) {
+  .contact-form { padding: 24px 18px; }
+  .form-split { grid-template-columns: 1fr; }
+  .choice-grid-4 { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Make the hidden attribute win over component display rules. */
+[hidden] { display: none !important; }

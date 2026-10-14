@@ -101,7 +101,41 @@ function initContactForm() {
   const note = document.getElementById('formNote');
   if (!form || !note) return;
 
+  // Where callback requests are sent. Set data-endpoint="" on the form to a
+  // webhook URL (e.g. a Make.com webhook that texts/emails Kevin). While it's
+  // empty, the form falls back to opening the visitor's email app, pre-filled.
+  const ENDPOINT = (form.dataset.endpoint || '').trim();
   const BUSINESS_EMAIL = 'info@dunedinplumbing.co.uk';
+
+  const success = document.getElementById('formSuccess');
+  const successText = document.getElementById('formSuccessText');
+  const callout = document.getElementById('emergencyCallout');
+  const dateRow = document.getElementById('dateRow');
+  const dateInput = document.getElementById('callbackDate');
+  const submitBtn = form.querySelector('button[type="submit"]');
+
+  // Dates: nothing in the past.
+  if (dateInput) {
+    const today = new Date();
+    const iso = new Date(today.getTime() - today.getTimezoneOffset() * 60000).toISOString().slice(0, 10);
+    dateInput.min = iso;
+  }
+
+  const value = (name) => {
+    const el = form.elements[name];
+    return el ? String(el.value || '').trim() : '';
+  };
+
+  const syncConditional = () => {
+    if (callout) callout.hidden = !value('urgency').startsWith('Emergency');
+    if (dateRow) {
+      const pickDate = value('day') === 'Another day';
+      dateRow.hidden = !pickDate;
+      if (dateInput) dateInput.required = pickDate;
+    }
+  };
+  form.addEventListener('change', syncConditional);
+  syncConditional();
 
   form.addEventListener('input', (event) => {
     if (event.target.getAttribute('aria-invalid') === 'true' && event.target.value.trim()) {
@@ -109,44 +143,91 @@ function initContactForm() {
     }
   });
 
-  form.addEventListener('submit', (event) => {
+  const setError = (message, field) => {
+    note.textContent = message;
+    note.classList.add('is-error');
+    if (field) field.focus();
+  };
+
+  const showSuccess = (data) => {
+    const when = data.day === 'Another day' && data.date
+      ? new Date(data.date + 'T12:00').toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' })
+      : data.day.toLowerCase();
+    const slot = data.time === 'Any time' ? '' : `, ${data.time.split(' (')[0].toLowerCase()}`;
+    successText.textContent = `Thanks ${data.name.split(' ')[0]} — Kevin will call you on ${data.phone} ${when}${slot}.`;
+    form.hidden = true;
+    success.hidden = false;
+    success.focus();
+  };
+
+  form.addEventListener('submit', async (event) => {
     event.preventDefault();
-
-    const name = form.name.value.trim();
-    const phone = form.phone.value.trim();
-    const email = form.email.value.trim();
-    const service = form.service.value;
-    const message = form.message.value.trim();
-
-    // Flag missing required fields for screen readers and move focus to
-    // the first one, so keyboard users aren't left guessing.
-    const missing = [];
-    [form.name, form.phone].forEach((field) => {
-      const empty = !field.value.trim();
-      field.setAttribute('aria-invalid', String(empty));
-      if (empty) missing.push(field);
-    });
-
-    if (missing.length) {
-      note.textContent = 'Please add your name and a phone number so we can call you back.';
-      note.classList.add('is-error');
-      missing[0].focus();
-      return;
-    }
-
+    note.textContent = '';
     note.classList.remove('is-error');
 
-    const subject = encodeURIComponent(`Callback request: ${service}`);
+    // Spam trap: real visitors never see or fill this field.
+    if (value('company')) { showSuccess({ name: 'there', phone: 'your number', day: 'Today', time: 'Any time' }); return; }
+
+    // Required fields: flag for screen readers and focus the first problem.
+    const name = form.elements.name;
+    const phone = form.elements.phone;
+    const digits = phone.value.replace(/\D/g, '');
+    const nameBad = !name.value.trim();
+    const phoneBad = digits.length < 10 || digits.length > 13;
+    name.setAttribute('aria-invalid', String(nameBad));
+    phone.setAttribute('aria-invalid', String(phoneBad));
+
+    if (nameBad) return setError('Please add your name so Kevin knows who he’s calling.', name);
+    if (phoneBad) return setError('Please check your phone number — it looks a digit or two short.', phone);
+    if (value('day') === 'Another day' && !value('date')) {
+      dateInput.setAttribute('aria-invalid', 'true');
+      return setError('Please pick a date for your callback.', dateInput);
+    }
+
+    const data = {
+      name: value('name'),
+      phone: value('phone'),
+      email: value('email'),
+      postcode: value('postcode').toUpperCase(),
+      urgency: value('urgency'),
+      service: value('service'),
+      day: value('day'),
+      date: value('day') === 'Another day' ? value('date') : '',
+      time: value('time'),
+      message: value('message'),
+      page: window.location.pathname,
+      submitted_at: new Date().toISOString(),
+    };
+
+    if (ENDPOINT) {
+      submitBtn.setAttribute('aria-busy', 'true');
+      submitBtn.disabled = true;
+      try {
+        const res = await fetch(ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        form.reset();
+        showSuccess(data);
+        return;
+      } catch (err) {
+        // Fall through to the email fallback so the enquiry isn't lost.
+      } finally {
+        submitBtn.removeAttribute('aria-busy');
+        submitBtn.disabled = false;
+      }
+    }
+
+    const when = data.day === 'Another day' ? data.date : data.day;
+    const subject = encodeURIComponent(`Callback request: ${data.service} (${data.urgency})`);
     const body = encodeURIComponent(
-      `Name: ${name}\nPhone: ${phone}\nEmail: ${email || 'Not provided'}\nService: ${service}\n\nDetails:\n${message || 'Not provided'}`
+      `Name: ${data.name}\nPhone: ${data.phone}\nEmail: ${data.email || 'Not provided'}\nPostcode: ${data.postcode || 'Not provided'}\n` +
+      `Urgency: ${data.urgency}\nService: ${data.service}\nCall back: ${when}, ${data.time}\n\nDetails:\n${data.message || 'Not provided'}`
     );
-
-    // No backend on this static site — hand the enquiry to the visitor's
-    // email client, pre-filled, so nothing gets lost.
     window.location.href = `mailto:${BUSINESS_EMAIL}?subject=${subject}&body=${body}`;
-
-    note.textContent = "Thanks! Your email app should now be open with your request ready to send.";
-    form.reset();
+    note.textContent = 'Your email app should now be open with your request filled in — just press send.';
   });
 }
 
