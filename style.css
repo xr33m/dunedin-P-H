@@ -1128,3 +1128,49 @@ svg { display: block; }
 
 /* Make the hidden attribute win over component display rules. */
 [hidden] { display: none !important; }
+
+/* ==========================================================================
+   Mobile polish
+   ========================================================================== */
+
+/* Whole service card is tappable (the "Learn more" link stretches over it). */
+.service-card { position: relative; }
+.service-link::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
+.service-card:focus-within { border-color: var(--teal-500); }
+
+/* Two-part bottom bar on phones: Call | Book a callback. */
+.mobile-call-bar { padding: 0; gap: 0; align-items: stretch; }
+.mobile-call-bar a {
+  flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 56px; padding: 0 10px; color: #fff; font-weight: 700; font-size: 1rem;
+}
+.mobile-call-bar .mcb-call { background: var(--copper-700); }
+.mobile-call-bar .mcb-book { background: var(--navy-900); }
+.mobile-call-bar a:focus-visible { outline: 3px solid #fff; outline-offset: -5px; }
+
+@media (max-width: 780px) {
+  body { padding-bottom: calc(56px + env(safe-area-inset-bottom, 0px)); }
+  .mobile-call-bar { padding-bottom: env(safe-area-inset-bottom, 0px); background: var(--navy-900); }
+
+  /* Keep back-to-top clear of the bottom bar. */
+  .back-to-top { bottom: calc(72px + env(safe-area-inset-bottom, 0px)); right: 14px; }
+
+  /* 16px inputs stop iPhones zooming the page when a field is tapped. */
+  .form-row input, .form-row select, .form-row textarea { font-size: 16px; }
+
+  /* Comfortable tap targets. */
+  .choice > span, .choice-compact > .choice > span { min-height: 46px; }
+  .footer-col { gap: 0; }
+  .footer-col a { display: inline-flex; align-items: center; min-height: 40px; }
+  .contact-details a { display: inline-flex; align-items: center; min-height: 44px; }
+  .breadcrumb a { display: inline-block; padding: 8px 0; }
+
+  /* Anchor jumps (e.g. Book a callback) land below the sticky header. */
+  [id] { scroll-margin-top: 72px; }
+}
+
+/* Long dropdown options / wider 16px inputs must never stretch the layout. */
+.contact-inner > *, .contact-form-wrap, .contact-form { min-width: 0; }
+.form-row input, .form-row select, .form-row textarea { width: 100%; min-width: 0; max-width: 100%; }
+.form-split { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 520px) { .form-split { grid-template-columns: minmax(0, 1fr); } }
