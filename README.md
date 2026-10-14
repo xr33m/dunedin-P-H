@@ -1,8 +1,10 @@
 # Dunedin Plumbing & Heating — Enhancement Plan
 
-Status: **Phases 1 (Design & Motion) and 2 (Copywriting) are built and
-pushed.** Phase 3+ are still planning only. This file is the shared
-checklist — tick items off as they're approved and built.
+Status: **Phases 1 (Design & Motion), 2 (Copywriting) and 3 (SEO/Schema)
+are built and pushed** — Phase 3's EEAT items and favicon set remain
+blocked on Phase 0 client data. Phases 4+ are still planning only. This
+file is the shared checklist — tick items off as they're approved and
+built.
 
 Site lives in this folder as plain HTML/CSS/JS (`index.html`, `style.css`,
 `script.js`, plus `/services/<slug>/` and `/areas/<slug>/` subpages). No
@@ -112,36 +114,52 @@ Framework per page type:
 
 ---
 
-## Phase 3 — SEO, Schema & EEAT
+## Phase 3 — SEO, Schema & EEAT ✅ MOSTLY DONE
 
 *Acting as SEO specialist.*
 
-- [ ] Unique, keyword-targeted `<title>` and meta description per page
-      (service pages and area pages have a first pass already — refine
-      with real keyword targeting)
-- [ ] One clear, unique H1 per page — audit for consistency across all
-      19 pages
-- [ ] Schema markup:
-  - [ ] `LocalBusiness`/`Plumber` (already on homepage — expand with real
-        address/geo if the client wants a public address)
-  - [ ] `Service` schema per service page (already a first pass — refine)
-  - [ ] `BreadcrumbList` schema matching the visible breadcrumbs
-  - [ ] `FAQPage` schema once Phase 2 FAQs are written
-  - [ ] Per-review `Review` markup (currently only aggregate rating)
+- [x] Unique `<title>` and meta description per page (all 14 pages —
+      service/area titles follow a `{Service/Area} Edinburgh | Brand`
+      pattern; descriptions truncate at word boundaries, not mid-word)
+- [x] One clear, unique H1 per page — audited across all pages
+      (homepage, 7 service, 6 area, 404) via automated scan
+- [x] Schema markup:
+  - [x] `LocalBusiness`/`Plumber` on homepage, expanded with `url` and
+        per-review `Review` entries (no street address — see EEAT below)
+  - [x] `Service` schema per service page, refined with `description`
+        and canonical `url`
+  - [x] `BreadcrumbList` schema matching the visible breadcrumbs on
+        every service/area page
+  - [x] `FAQPage` schema wrapping the Phase 2 FAQs on every service page
+  - [x] Per-review `Review` markup (homepage: 6 reviews; each
+        service/area page: its own featured review) — in addition to,
+        not instead of, aggregate rating
 - [ ] EEAT signals:
-  - [ ] Expand About/Kevin section with specific, real experience details
-  - [ ] Display certifications/Gas Safe number once Phase 0 supplies them
-  - [ ] Consistent NAP (name/address/phone) across site, GBP and any
-        directories
-  - [ ] Link out to the real Google Business Profile for review
-        verification
-- [ ] Location pages: add local map embed (placeholder until a real
-      address/area is confirmed), strengthen local-keyword usage in
-      headings
-- [ ] Technical SEO: `sitemap.xml`, `robots.txt`, canonical tags, Open
-      Graph + Twitter Card meta, full favicon set, custom 404 page
+  - [ ] Expand About section with specific, real experience details —
+        still blocked on more Phase 0 background info
+  - [ ] Display certifications/Gas Safe number — **blocked on Phase 0**
+  - [ ] Consistent NAP (name/address/phone) — already consistent
+        site-wide (no street address used anywhere, so nothing to
+        contradict)
+  - [ ] Link out to the real Google Business Profile — **blocked on
+        Phase 0** (need the real GBP URL)
+- [x] Location pages: added a local map placeholder (dashed block,
+      sized for a real Google Maps embed) to every area page; headings
+      already use `{Service} in {Area}` / `Plumbing & Heating in {Area}`
+      patterns
+- [x] Technical SEO: `sitemap.xml` (all 14 indexable pages), `robots.txt`,
+      canonical tags, Open Graph + Twitter Card meta on every page,
+      custom 404 page matching the design system
+  - [ ] Full favicon set (apple-touch-icon, multiple raster sizes) —
+        **blocked on Phase 0** (no image-generation tool available here;
+        needs a real logo/icon asset to export from)
 - [ ] Submit to Google Search Console + Bing Webmaster Tools once live
-      (Phase 6)
+      (Phase 6 — needs real hosting first)
+
+Bug fixed in this pass: lead copy containing embedded quotes (e.g.
+`"just old"`, `"nearly fixed"`) was breaking out of the meta
+description/OG/Twitter `content="..."` attributes. Added proper
+HTML-attribute escaping across all generated pages.
 
 ---
 
