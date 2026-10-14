@@ -1,8 +1,8 @@
 # Dunedin Plumbing & Heating — Enhancement Plan
 
-Status: **Phase 1 (Design & Motion) is built and pushed.** Phases 2+ are
-still planning only. This file is the shared checklist — tick items off as
-they're approved and built.
+Status: **Phases 1 (Design & Motion) and 2 (Copywriting) are built and
+pushed.** Phase 3+ are still planning only. This file is the shared
+checklist — tick items off as they're approved and built.
 
 Site lives in this folder as plain HTML/CSS/JS (`index.html`, `style.css`,
 `script.js`, plus `/services/<slug>/` and `/areas/<slug>/` subpages). No
@@ -72,26 +72,43 @@ homepage and subpages).
 
 ---
 
-## Phase 2 — Typography & Copywriting
+## Phase 2 — Typography & Copywriting ✅ DONE
 
 *Acting as copywriting/CRO specialist. Goal: more enquiries, more time on
 page.*
 
+Decisions locked in before writing (confirmed with client):
+- **Voice:** team ("we"), not first-person Kevin
+- **Core objection to beat:** trust — "cowboy plumbers" / scams — not price
+  or speed
+- **Urgency level:** strong, consequence-driven in emergency copy
+- **FAQs:** written now (content), schema markup deferred to Phase 3
+
+Framework per page type:
+- Homepage hero / why-us / about: **PAS** + **HSO**, naming the fear
+  (no-shows, shifting quotes, vanishing invoices) before the solution
+- Service pages: **DIC** hook disrupting the "this is normal" assumption,
+  then straight into proof
+- Area pages: **AIDA**, same trust throughline, less narrative weight
+- Emergency banner / urgent CTAs: compressed **DIC**, consequence-driven
+
+- [x] Rewrite hero, service, and area copy using a persuasion framework
+      (PAS/HSO/DIC/AIDA per page type, not one-size-fits-all)
+- [x] Strengthen CTA microcopy and trust-bar/why-us copy around the
+      cowboy-plumber objection specifically
+- [x] Add a short FAQ block per service (3 Q&As each, written now —
+      FAQPage schema itself is still Phase 3)
+- [x] Social-proof callouts placed near CTAs (hero stat card, trust bar,
+      about-stats) in addition to the dedicated reviews section
 - [ ] Audit and tighten type scale (headline sizes, line-height, measure)
-      for readability on mobile and desktop
-- [ ] Rewrite hero, service, and area copy using a persuasion framework
-      (problem → agitation → solution) without sounding salesy
-- [ ] Strengthen CTA microcopy (button text variants, urgency that's
-      honest — e.g. tied to real 24hr availability, not fake scarcity)
-- [ ] Add a short FAQ block per service (serves copy AND SEO — see Phase 3)
-- [ ] Tighten paragraphs for scannability: shorter blocks, bolded key
-      phrases, bullet-first where possible
-- [ ] Social-proof callouts placed near CTAs, not just in the reviews
-      section (e.g. a rating strip repeated near bottom-of-page CTAs)
+      for readability on mobile and desktop — not done this pass, still
+      open if needed
 - [ ] Review all placeholder/generic claims (e.g. "fully insured") and
-      flag any that need Phase 0 data to become specific and provable
-- [ ] Pass on About/Kevin section — more personal, specific detail (ties
-      into EEAT in Phase 3)
+      flag any that need Phase 0 data to become specific and provable —
+      still open, blocked on Phase 0 client input
+- [ ] Deeper pass on About section with specific, real detail once
+      Phase 0 supplies more background — current version is a solid
+      HSO draft but still somewhat generic without real specifics
 
 ---
 
