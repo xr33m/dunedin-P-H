@@ -973,6 +973,13 @@ svg { display: block; }
 /* ---------- Stat counters (plain styling hook, animation via JS) ---------- */
 [data-count-to] { font-variant-numeric: tabular-nums; }
 
+/* ---------- FAQ ---------- */
+.faq-list { display: flex; flex-direction: column; gap: 0; max-width: 760px; margin: 0 auto; }
+.faq-item { padding: 22px 0; border-bottom: 1px solid var(--border); }
+.faq-item:first-child { padding-top: 0; }
+.faq-item h3 { font-size: 1.02rem; margin-bottom: 8px; color: var(--navy-900); }
+.faq-item p { color: var(--text-muted); margin: 0; font-size: 0.96rem; }
+
 @media (max-width: 780px) {
   .site-header.is-scrolled .header-inner { height: 60px; }
 }
