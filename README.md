@@ -1,7 +1,8 @@
 # Dunedin Plumbing & Heating — Enhancement Plan
 
-Status: **PLANNING — nothing below has been implemented yet.** This file is the
-shared checklist. Tick items off as they're approved and built.
+Status: **Phase 1 (Design & Motion) is built and pushed.** Phases 2+ are
+still planning only. This file is the shared checklist — tick items off as
+they're approved and built.
 
 Site lives in this folder as plain HTML/CSS/JS (`index.html`, `style.css`,
 `script.js`, plus `/services/<slug>/` and `/areas/<slug>/` subpages). No
@@ -35,33 +36,39 @@ Flagging now so it doesn't block later.
 
 ---
 
-## Phase 1 — Design & Motion
+## Phase 1 — Design & Motion ✅ DONE
 
 *Acting as web designer. Images use styled placeholders (labelled blocks,
 not stock photos) until Phase 0 assets arrive.*
 
-- [ ] Scroll-triggered reveal animations on section content (fade + slide
+- [x] Scroll-triggered reveal animations on section content (fade + slide
       up), via vanilla `IntersectionObserver` — no added dependency
-- [ ] Respect `prefers-reduced-motion`: all animation disabled/instant for
+- [x] Respect `prefers-reduced-motion`: all animation disabled/instant for
       users who request it
-- [ ] Animated stat counters (5.0★, 20 reviews, 24/7) that count up once
+- [x] Animated stat counters (5.0★, 20 reviews) that count up once
       scrolled into view
-- [ ] Scrollspy: active nav link highlights as you scroll past each section
-- [ ] Refined sticky header: shrink/compact on scroll, not just a shadow
-- [ ] Parallax/subtle depth on hero background gradient shapes
-- [ ] Hover/press micro-interactions pass on buttons, cards, nav (tactile,
+- [x] Scrollspy: active nav link highlights as you scroll past each section
+      (homepage; subpages link back to homepage anchors so scrollspy
+      doesn't apply there)
+- [x] Refined sticky header: shrinks/compacts on scroll, not just a shadow
+- [x] Parallax/subtle depth on hero background gradient shapes (homepage +
+      every service/area page)
+- [x] Hover/press micro-interactions pass on buttons, cards, nav (tactile,
       not showy)
-- [ ] Image placeholder system: labelled placeholder blocks (e.g. "Photo:
+- [x] Image placeholder system: labelled placeholder blocks (e.g. "Photo:
       Bathroom renovation, Edinburgh") sized correctly so real photos can
-      be dropped in later by swapping a file, no layout changes needed
-- [ ] Add a hero visual (placeholder) — currently text/stat-card only
-- [ ] Apply the same motion system consistently across homepage, service
+      be dropped in later by swapping a file, no layout changes needed —
+      used in a new homepage "Recent Work" gallery and every service/area
+      page hero
+- [x] Add a hero visual (placeholder) — "Recent Work" gallery added to
+      homepage; service/area pages got a placeholder photo block each
+- [x] Apply the same motion system consistently across homepage, service
       pages and area pages
 
-**Open question:** vanilla `IntersectionObserver` (zero dependencies, fast,
-fully custom) vs. a small animation library like GSAP ScrollTrigger via CDN
-(faster to build richer effects, adds ~40–60kb). Recommend vanilla unless
-you want more elaborate parallax/pinning effects.
+Built with vanilla `IntersectionObserver` (confirmed: zero dependencies,
+verified working with and without reduced-motion, and confirmed every
+`.reveal` element resolves to visible after a real scroll-through on both
+homepage and subpages).
 
 ---
 
