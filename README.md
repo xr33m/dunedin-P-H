@@ -48,7 +48,7 @@ not stock photos) until Phase 0 assets arrive.*
       up), via vanilla `IntersectionObserver` — no added dependency
 - [x] Respect `prefers-reduced-motion`: all animation disabled/instant for
       users who request it
-- [x] Animated stat counters (5.0★, 20 reviews) that count up once
+- [x] Animated stat counters (5.0★, 25 Google reviews) that count up once
       scrolled into view
 - [x] Scrollspy: active nav link highlights as you scroll past each section
       (homepage; subpages link back to homepage anchors so scrollspy
