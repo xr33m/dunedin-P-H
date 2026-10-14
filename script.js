@@ -22,10 +22,35 @@ function initMobileNav() {
   const nav = document.getElementById('mainNav');
   if (!toggle || !nav) return;
 
-  toggle.addEventListener('click', () => {
-    const isOpen = nav.classList.toggle('is-open');
+  const setOpen = (isOpen, { returnFocus = false } = {}) => {
+    nav.classList.toggle('is-open', isOpen);
     toggle.classList.toggle('is-open', isOpen);
     toggle.setAttribute('aria-expanded', String(isOpen));
+    toggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+    if (isOpen) {
+      const first = nav.querySelector('a');
+      if (first) first.focus();
+    } else if (returnFocus) {
+      toggle.focus();
+    }
+  };
+
+  toggle.addEventListener('click', () => {
+    setOpen(!nav.classList.contains('is-open'));
+  });
+
+  // Escape closes the menu and puts focus back on the toggle.
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && nav.classList.contains('is-open')) {
+      setOpen(false, { returnFocus: true });
+    }
+  });
+
+  // Close when focus or a click leaves the open menu.
+  document.addEventListener('click', (event) => {
+    if (nav.classList.contains('is-open') && !nav.contains(event.target) && !toggle.contains(event.target)) {
+      setOpen(false);
+    }
   });
 }
 
@@ -41,6 +66,7 @@ function initSmoothAnchorClose() {
       if (toggle) {
         toggle.classList.remove('is-open');
         toggle.setAttribute('aria-expanded', 'false');
+        toggle.setAttribute('aria-label', 'Open menu');
       }
     });
   });
@@ -77,6 +103,12 @@ function initContactForm() {
 
   const BUSINESS_EMAIL = 'info@dunedinplumbing.co.uk';
 
+  form.addEventListener('input', (event) => {
+    if (event.target.getAttribute('aria-invalid') === 'true' && event.target.value.trim()) {
+      event.target.setAttribute('aria-invalid', 'false');
+    }
+  });
+
   form.addEventListener('submit', (event) => {
     event.preventDefault();
 
@@ -86,9 +118,19 @@ function initContactForm() {
     const service = form.service.value;
     const message = form.message.value.trim();
 
-    if (!name || !phone) {
+    // Flag missing required fields for screen readers and move focus to
+    // the first one, so keyboard users aren't left guessing.
+    const missing = [];
+    [form.name, form.phone].forEach((field) => {
+      const empty = !field.value.trim();
+      field.setAttribute('aria-invalid', String(empty));
+      if (empty) missing.push(field);
+    });
+
+    if (missing.length) {
       note.textContent = 'Please add your name and a phone number so we can call you back.';
       note.classList.add('is-error');
+      missing[0].focus();
       return;
     }
 
@@ -172,6 +214,7 @@ function initCounters() {
       return;
     }
 
+
     const duration = 1100;
     const start = performance.now();
 
@@ -199,6 +242,13 @@ function initCounters() {
     });
   }, { threshold: 0.6 });
 
+  if (!PREFERS_REDUCED_MOTION) {
+    counters.forEach((el) => {
+      const raw = el.getAttribute('data-count-to');
+      const decimals = (raw.split('.')[1] || '').length;
+      el.textContent = (0).toFixed(decimals) + (el.getAttribute('data-suffix') || '');
+    });
+  }
   counters.forEach((el) => observer.observe(el));
 }
 

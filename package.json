@@ -1,0 +1,16 @@
+{
+  "name": "dunedin-plumbing-heating",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Dunedin Plumbing & Heating — static site (plain HTML/CSS/JS). Vite is only used as a dev server and preview host for Bolt.",
+  "scripts": {
+    "dev": "vite",
+    "start": "vite",
+    "build": "node scripts/build.mjs",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^6.0.0"
+  }
+}

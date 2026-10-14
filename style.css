@@ -14,6 +14,10 @@
   --copper-500: #e8622c;
   --copper-600: #d24f1c;
   --copper-100: #fdece3;
+  /* AA-safe shades for text and text-bearing backgrounds (Phase 4).
+     copper-500/600 stay for icons, borders and decoration only. */
+  --copper-700: #bf4a1a; /* 4.99:1 with white */
+  --copper-800: #a3401a; /* 6.35:1 with white */
 
   /* Neutrals */
   --bg: #f7fafb;
@@ -72,7 +76,7 @@ svg { display: block; }
   position: absolute;
   left: -9999px;
   top: 0;
-  background: var(--copper-500);
+  background: var(--copper-700);
   color: #fff;
   padding: 12px 20px;
   z-index: 999;
@@ -95,11 +99,11 @@ svg { display: block; }
   white-space: nowrap;
 }
 .btn-primary {
-  background: var(--copper-500);
+  background: var(--copper-700);
   color: #fff;
-  box-shadow: 0 8px 20px rgba(232, 98, 44, 0.35);
+  box-shadow: 0 8px 20px rgba(191, 74, 26, 0.32);
 }
-.btn-primary:hover { background: var(--copper-600); transform: translateY(-2px); }
+.btn-primary:hover { background: var(--copper-800); transform: translateY(-2px); }
 .btn-ghost {
   background: transparent;
   color: #fff;
@@ -112,7 +116,7 @@ svg { display: block; }
   background: var(--bg-alt);
   border-color: var(--border);
 }
-.btn-call:hover { background: var(--copper-100); border-color: var(--copper-500); color: var(--copper-600); }
+.btn-call:hover { background: var(--copper-100); border-color: var(--copper-500); color: var(--copper-800); }
 .btn-lg { padding: 16px 28px; font-size: 1.02rem; }
 .btn-block { width: 100%; }
 
@@ -346,7 +350,7 @@ svg { display: block; }
   height: 46px;
   border-radius: 12px;
   background: var(--copper-100);
-  color: var(--copper-500);
+  color: var(--copper-600);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -377,9 +381,9 @@ svg { display: block; }
   margin-top: 16px;
   font-size: 0.9rem;
   font-weight: 700;
-  color: var(--copper-500);
+  color: var(--copper-700);
 }
-.service-link:hover { color: var(--copper-600); }
+.service-link:hover { color: var(--copper-800); }
 
 .services-cta {
   margin-top: 44px;
@@ -493,7 +497,7 @@ svg { display: block; }
 
 /* ---------- Emergency banner ---------- */
 .emergency-banner {
-  background: linear-gradient(120deg, var(--copper-600), var(--copper-500));
+  background: linear-gradient(120deg, var(--copper-800), var(--copper-700));
   color: #fff;
 }
 .emergency-inner {
@@ -505,7 +509,7 @@ svg { display: block; }
   flex-wrap: wrap;
 }
 .emergency-inner h2 { color: #fff; margin-bottom: 8px; font-size: clamp(1.4rem, 2.6vw, 1.9rem); }
-.emergency-inner p { color: rgba(255,255,255,0.9); margin: 0; max-width: 46ch; }
+.emergency-inner p { color: #fff; margin: 0; max-width: 46ch; }
 .emergency-banner .btn-primary {
   background: var(--navy-900);
   box-shadow: 0 8px 20px rgba(11,36,54,0.35);
@@ -565,7 +569,7 @@ svg { display: block; }
   font-weight: 700;
 }
 .contact-details a { font-weight: 700; font-size: 1.1rem; color: var(--navy-900); }
-.contact-details a:hover { color: var(--copper-500); }
+.contact-details a:hover { color: var(--copper-700); }
 
 .contact-form {
   background: var(--surface);
@@ -603,7 +607,7 @@ svg { display: block; }
   color: var(--teal-500);
   min-height: 1.2em;
 }
-.form-note.is-error { color: var(--copper-600); }
+.form-note.is-error { color: var(--copper-700); }
 
 /* ---------- Sub-page hero + breadcrumb ---------- */
 .breadcrumb {
@@ -619,6 +623,7 @@ svg { display: block; }
 .breadcrumb .sep { color: rgba(255,255,255,0.35); }
 .breadcrumb.on-light { color: var(--text-muted); }
 .breadcrumb.on-light a { color: var(--navy-800); }
+.breadcrumb.on-light a:hover { color: var(--copper-700); }
 
 .page-hero {
   background:
@@ -730,7 +735,7 @@ svg { display: block; }
 }
 .areas-list a.area-pill:hover {
   border-color: var(--copper-500);
-  color: var(--copper-600);
+  color: var(--copper-800);
   transform: translateY(-2px);
 }
 
@@ -776,7 +781,7 @@ svg { display: block; }
   left: 0;
   right: 0;
   z-index: 90;
-  background: var(--copper-500);
+  background: var(--copper-700);
   color: #fff;
   align-items: center;
   justify-content: center;
@@ -898,7 +903,7 @@ svg { display: block; }
 .site-header.is-scrolled .brand-mark { width: 28px; height: 28px; transition: width 0.25s ease, height 0.25s ease; }
 
 /* ---------- Scrollspy active nav state ---------- */
-.main-nav a.is-active { color: var(--copper-600); }
+.main-nav a.is-active { color: var(--copper-700); }
 .main-nav a.is-active::after { transform: scaleX(1); }
 
 /* ---------- Button / card micro-interactions ---------- */
@@ -982,4 +987,61 @@ svg { display: block; }
 
 @media (max-width: 780px) {
   .site-header.is-scrolled .header-inner { height: 60px; }
+}
+
+/* ==========================================================================
+   Phase 4 — Accessibility
+   ========================================================================== */
+
+/* Visible keyboard focus everywhere (mouse clicks don't trigger it). */
+:focus-visible {
+  outline: 3px solid var(--teal-500);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+.btn:focus-visible,
+.back-to-top:focus-visible,
+.nav-toggle:focus-visible { outline-offset: 3px; border-radius: 999px; }
+/* Light ring on dark backgrounds (hero, footer, emergency banner, page heroes). */
+.hero :focus-visible,
+.page-hero :focus-visible,
+.site-footer :focus-visible,
+.emergency-banner :focus-visible,
+.mobile-call-bar:focus-visible { outline-color: #fff; }
+
+/* Form fields: keep the border change but add a clear focus ring too. */
+.form-row input:focus-visible,
+.form-row select:focus-visible,
+.form-row textarea:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(27, 122, 140, 0.35);
+}
+.form-row input[aria-invalid="true"],
+.form-row textarea[aria-invalid="true"] { border-color: var(--copper-700); }
+
+/* Skip link: bring it fully into view when focused. */
+.skip-link:focus { left: 12px; top: 12px; border-radius: 8px; outline: 3px solid var(--navy-900); }
+
+/* Screen-reader-only text helper. */
+.sr-only {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0);
+  white-space: nowrap; border: 0;
+}
+
+/* Reduced motion: no smooth scrolling or hover lifts. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+}
+
+/* Phase 4 — performance prep: a real <img> dropped into a placeholder fills
+   the same box, so swapping in photos causes no layout shift. */
+.img-placeholder { position: relative; overflow: hidden; }
+.img-placeholder > img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
 }

@@ -1,8 +1,9 @@
 # Dunedin Plumbing & Heating — Enhancement Plan
 
-Status: **Phases 1 (Design & Motion), 2 (Copywriting) and 3 (SEO/Schema)
-are built and pushed** — Phase 3's EEAT items and favicon set remain
-blocked on Phase 0 client data. Phases 4+ are still planning only. This
+Status: **Phases 1 (Design & Motion), 2 (Copywriting), 3 (SEO/Schema)
+and 4 (Performance & Accessibility) are built and pushed** — Phase 3's EEAT items and favicon set remain
+blocked on Phase 0 client data. Phase 4's image performance item waits on real photos. Phases 5+ are
+still planning only. This
 file is the shared checklist — tick items off as they're approved and
 built.
 
@@ -163,13 +164,43 @@ HTML-attribute escaping across all generated pages.
 
 ---
 
-## Phase 4 — Performance & Accessibility *(suggested addition)*
+## Phase 4 — Performance & Accessibility ✅ DONE (images pending)
 
-- [ ] Core Web Vitals pass once real images land (lazy loading, correct
-      sizing, modern formats)
-- [ ] WCAG AA contrast check across the navy/copper/teal palette
-- [ ] Full keyboard navigation + visible focus states audit
-- [ ] Screen-reader pass on nav, forms, and icon-only buttons
+- [ ] Core Web Vitals pass once real images land — **blocked on Phase 0
+      photos**. Prep done: a real `<img>` dropped inside any
+      `.img-placeholder` now fills the same box (no layout shift). When
+      adding photos use `loading="lazy" decoding="async"`, explicit
+      `width`/`height`, and WebP/AVIF.
+- [x] WCAG AA contrast check across the navy/copper/teal palette — the
+      original copper (#e8622c) only reached 3.4:1 with white, failing AA
+      for buttons and small text. Added `--copper-700` (#bf4a1a, 4.99:1)
+      and `--copper-800` (#a3401a, 6.35:1) for primary buttons, the
+      mobile call bar, skip link, links, active nav, form errors and the
+      emergency banner. Bright copper kept for icons/borders/decoration,
+      where 3:1 applies and it passes. Teal, muted text and all
+      white-on-navy text already passed.
+- [x] Full keyboard navigation + visible focus states — global
+      `:focus-visible` ring (teal on light, white on dark sections), form
+      focus ring, skip link now lands fully on screen. Mobile menu: focus
+      moves into the menu on open, Escape closes it and returns focus to
+      the toggle, clicking outside closes it.
+- [x] Screen-reader pass on nav, forms, and icon-only buttons — all
+      decorative SVGs `aria-hidden`; star glyphs hidden (rating is in the
+      text next to them); menu toggle label switches Open/Close; form
+      marks missing fields `aria-invalid`, focuses the first one and
+      announces the error via the existing live region; stat counters
+      hold their real value in the HTML (JS only animates them).
+- [x] Reduced motion now also disables smooth scrolling and hover
+      transitions site-wide.
+
+### Running locally / on Bolt.new
+
+`package.json` + `vite.config.js` exist only so Bolt (or any machine) can
+preview the site — the site itself is still plain HTML/CSS/JS.
+
+- `npm install` then `npm run dev` → live preview with all pages
+- `npm run build` → copies the site unchanged into `dist/` for deploys
+  (publish directory: `dist`)
 
 ## Phase 5 — Analytics & Conversion Tracking *(suggested addition)*
 
