@@ -105,7 +105,7 @@ function initBackToTop() {
 // Lead delivery, shared by the main booking form and the hero quick bar.
 // Endpoint lives on #contactForm's data-endpoint (see README). Returns 'sent'
 // when the webhook accepted it, 'mailto' when we fell back to the email app.
-const BUSINESS_EMAIL = 'info@dunedinplumbing.co.uk';
+const BUSINESS_EMAIL = 'dunedinph@gmail.com';
 
 function leadEndpoint() {
   const form = document.getElementById('contactForm');
@@ -236,6 +236,7 @@ function initContactForm() {
       time: value('time'),
       message: value('message'),
       page: window.location.pathname,
+      lead_source: 'Website form',
       submitted_at: new Date().toISOString(),
     };
 
@@ -291,7 +292,7 @@ function initQuickForm() {
       name: name.value.trim(), phone: phone.value.trim(), email: '', postcode: '',
       urgency: 'Not specified (quick request)', service: form.elements.service.value,
       day: 'Today', date: '', time: 'Any time', message: '',
-      page: window.location.pathname, source: 'hero quick bar',
+      page: window.location.pathname, lead_source: 'Website quick bar',
       submitted_at: new Date().toISOString(),
     };
 

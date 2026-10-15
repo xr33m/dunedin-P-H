@@ -32,6 +32,12 @@
   <url><loc>https://dunedinplumbing.co.uk/areas/musselburgh/</loc><lastmod>2026-10-15</lastmod><priority>0.8</priority></url>
   <url><loc>https://dunedinplumbing.co.uk/areas/dalkeith/</loc><lastmod>2026-10-15</lastmod><priority>0.8</priority></url>
   <url><loc>https://dunedinplumbing.co.uk/areas/prestonpans/</loc><lastmod>2026-10-15</lastmod><priority>0.8</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/dunfermline/</loc><lastmod>2026-10-15</lastmod><priority>0.8</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/rosyth/</loc><lastmod>2026-10-15</lastmod><priority>0.8</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/inverkeithing/</loc><lastmod>2026-10-15</lastmod><priority>0.8</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/dalgety-bay/</loc><lastmod>2026-10-15</lastmod><priority>0.8</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/burntisland/</loc><lastmod>2026-10-15</lastmod><priority>0.8</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/kirkcaldy/</loc><lastmod>2026-10-15</lastmod><priority>0.8</priority></url>
   <url><loc>https://dunedinplumbing.co.uk/areas/leith/emergency-plumbing/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
   <url><loc>https://dunedinplumbing.co.uk/areas/leith/leak-repair/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
   <url><loc>https://dunedinplumbing.co.uk/areas/leith/bathroom-renovations/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
@@ -230,4 +236,70 @@
   <url><loc>https://dunedinplumbing.co.uk/areas/prestonpans/water-line-repair/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
   <url><loc>https://dunedinplumbing.co.uk/areas/prestonpans/lead-replacement/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
   <url><loc>https://dunedinplumbing.co.uk/areas/prestonpans/plumbing-heating/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/dunfermline/emergency-plumbing/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/dunfermline/leak-repair/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/dunfermline/bathroom-renovations/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/dunfermline/kitchen-fitting/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/dunfermline/radiator-maintenance/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/dunfermline/blocked-drains/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/dunfermline/tap-repair-installation/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/dunfermline/water-heater-installation-repair/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/dunfermline/water-line-repair/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/dunfermline/lead-replacement/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/dunfermline/plumbing-heating/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/rosyth/emergency-plumbing/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/rosyth/leak-repair/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/rosyth/bathroom-renovations/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/rosyth/kitchen-fitting/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/rosyth/radiator-maintenance/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/rosyth/blocked-drains/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/rosyth/tap-repair-installation/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/rosyth/water-heater-installation-repair/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/rosyth/water-line-repair/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/rosyth/lead-replacement/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/rosyth/plumbing-heating/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/inverkeithing/emergency-plumbing/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/inverkeithing/leak-repair/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/inverkeithing/bathroom-renovations/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/inverkeithing/kitchen-fitting/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/inverkeithing/radiator-maintenance/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/inverkeithing/blocked-drains/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/inverkeithing/tap-repair-installation/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/inverkeithing/water-heater-installation-repair/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/inverkeithing/water-line-repair/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/inverkeithing/lead-replacement/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/inverkeithing/plumbing-heating/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/dalgety-bay/emergency-plumbing/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/dalgety-bay/leak-repair/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/dalgety-bay/bathroom-renovations/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/dalgety-bay/kitchen-fitting/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/dalgety-bay/radiator-maintenance/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/dalgety-bay/blocked-drains/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/dalgety-bay/tap-repair-installation/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/dalgety-bay/water-heater-installation-repair/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/dalgety-bay/water-line-repair/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/dalgety-bay/lead-replacement/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/dalgety-bay/plumbing-heating/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/burntisland/emergency-plumbing/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/burntisland/leak-repair/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/burntisland/bathroom-renovations/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/burntisland/kitchen-fitting/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/burntisland/radiator-maintenance/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/burntisland/blocked-drains/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/burntisland/tap-repair-installation/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/burntisland/water-heater-installation-repair/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/burntisland/water-line-repair/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/burntisland/lead-replacement/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/burntisland/plumbing-heating/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/kirkcaldy/emergency-plumbing/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/kirkcaldy/leak-repair/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/kirkcaldy/bathroom-renovations/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/kirkcaldy/kitchen-fitting/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/kirkcaldy/radiator-maintenance/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/kirkcaldy/blocked-drains/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/kirkcaldy/tap-repair-installation/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/kirkcaldy/water-heater-installation-repair/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/kirkcaldy/water-line-repair/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/kirkcaldy/lead-replacement/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://dunedinplumbing.co.uk/areas/kirkcaldy/plumbing-heating/</loc><lastmod>2026-10-15</lastmod><priority>0.6</priority></url>
 </urlset>

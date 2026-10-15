@@ -192,18 +192,18 @@ contact sections on `index.html` (between `<!-- gen:… -->` markers).
   Fitting, Radiator Repair & Installation, Blocked Drains & Waste Pipes,
   Tap Repair & Installation, Water Heater Installation & Repairs, Water
   Line Repair, Lead Pipe Replacement, General Plumbing & Heating
-- 18 areas: Leith, Portobello, Morningside, Bruntsfield, Marchmont,
+- 24 areas: Leith, Portobello, Morningside, Bruntsfield, Marchmont,
   Newington, Stockbridge, New Town, Old Town, Corstorphine, Gorgie & Dalry,
   Murrayfield, Colinton, Liberton, Trinity & Granton, Musselburgh,
-  Dalkeith, Prestonpans
-- 198 area × service pages (`/areas/<area>/<service>/`) with copy tailored
+  Dalkeith, Prestonpans, and in Fife: Dunfermline, Rosyth, Inverkeithing,
+  Dalgety Bay, Burntisland, Kirkcaldy
+- 264 area × service pages (`/areas/<area>/<service>/`) with copy tailored
   to each area's housing stock, local FAQs, Service/FAQ/Breadcrumb schema
 - `/services/gas-boiler-servicing/` 301-redirects to General Plumbing &
   Heating (`_redirects`)
 - [ ] Confirm with Kevin: kitchen fitting and blocked drains are services
       he wants to advertise
-- [ ] Confirm `enquires@dunedinplumbing.co.uk` (from his current site) is
-      the right mailbox — the form's email fallback sends there
+- [x] Site email is dunedinph@gmail.com
 
 ### Running locally / on Bolt.new
 
@@ -223,12 +223,17 @@ preview the site — the site itself is still plain HTML/CSS/JS.
       postcode/email/details. Emergency choice shows a "call now" prompt.
       Validates phone numbers, flags errors for screen readers, has a
       spam honeypot, and shows a confirmation with the chosen callback time.
-- [ ] **Connect the form to Kevin** — set `data-endpoint="…"` on
-      `#contactForm` to a webhook (e.g. Make.com → SMS via the Dunedin
-      Twilio number and/or email). Until then it falls back to opening
-      the visitor's email app pre-filled (the old behaviour). Payload is
-      JSON: name, phone, email, postcode, urgency, service, day, date,
-      time, message, page, submitted_at.
+- [x] **Form connected** — both forms POST to `/api/lead`, a Netlify
+      function (`netlify/functions/lead.mjs`) that validates and forwards
+      to the Airtable automation "Website lead → Leads + email Kevin" in
+      the **Dunedin Plumbing & Heating CRM** base. It saves the lead
+      (Status = New) and emails dunedinph@gmail.com. Where the function
+      isn't running (e.g. Bolt preview) the form falls back to opening the
+      visitor's email app addressed to dunedinph@gmail.com.
+      Payload keys: name, phone, email, postcode, urgency, service, day,
+      date, time, message, page, lead_source, submitted_at.
+- [ ] Hosting must be Netlify (functions + `_redirects`). The Airtable
+      automation must be switched on in Airtable.
 - [x] **Trust strip on every page** — 5.0★ / 25 Google reviews, 24/7,
       price agreed before we start, named plumber; reassurance line under
       every submit button.

@@ -139,7 +139,7 @@ function footer({ home = false, contact = '#contact' } = {}) {
       </span>
       <div>
         <p class="brand-name">Dunedin Plumbing &amp; Heating</p>
-        <p class="footer-tagline">Honest, local plumbing across Edinburgh, East Lothian and Midlothian.</p>
+        <p class="footer-tagline">Honest, local plumbing across Edinburgh, the Lothians and Fife.</p>
         <p class="footer-rating"><span class="stars" aria-hidden="true">★★★★★</span> ${SITE.rating} from ${SITE.reviewCount} Google reviews</p>
       </div>
     </div>
@@ -426,7 +426,7 @@ function servicePage(s) {
   const crumbs = [['Home', '/'], ['Services', '/services/'], [s.name, path]];
   const hasGallery = !!s.gallery;
   const relatedSvcs = s.related.map((r) => svcBy[r]);
-  const body = `${pageHero({ crumbs, title: esc(s.name) + ' in Edinburgh', lead: esc(s.intro), photo: s.heroPhoto || s.photo, photoAlt: s.heroAlt || s.photoAlt, eyebrow: 'Edinburgh, East Lothian &amp; Midlothian' })}
+  const body = `${pageHero({ crumbs, title: esc(s.name) + ' in Edinburgh', lead: esc(s.intro), photo: s.heroPhoto || s.photo, photoAlt: s.heroAlt || s.photoAlt, eyebrow: 'Edinburgh, the Lothians &amp; Fife' })}
 
 ${TRUST_BAR}
 
@@ -465,7 +465,7 @@ ${faqSection(s.faqs)}
       <div class="section-head">
         ${chip('Areas')}
         <h2>${esc(s.name)} near you</h2>
-        <p class="section-lead">We cover Edinburgh and the surrounding towns. Pick your area for local details.</p>
+        <p class="section-lead">We cover Edinburgh, the Lothians and Fife. Pick your area for local details.</p>
       </div>
       ${areaPills(AREAS, (a) => comboUrl(a, s))}
     </div>
@@ -591,7 +591,7 @@ function areasIndex() {
   const path = '/areas/';
   const crumbs = [['Home', '/'], ['Areas', path]];
   const regions = [...new Set(AREAS.map((a) => a.region))];
-  const body = `${pageHero({ crumbs, title: 'Areas we cover', lead: 'Edinburgh, East Lothian and Midlothian — the same named plumber, the same upfront pricing and the same 24-hour emergency cover wherever you are.', photo: 'bath-scallop-1', photoAlt: 'Renovated bathroom with white scallop wall tiles', eyebrow: 'Coverage' })}
+  const body = `${pageHero({ crumbs, title: 'Areas we cover', lead: 'Edinburgh, the Lothians and Fife — the same named plumber, the same upfront pricing and the same 24-hour emergency cover wherever you are.', photo: 'bath-scallop-1', photoAlt: 'Renovated bathroom with white scallop wall tiles', eyebrow: 'Coverage' })}
 
 ${TRUST_BAR}
 
@@ -607,7 +607,7 @@ ${AREAS.filter((a) => a.region === r).map((a) => `          <a class="area-card"
           </a>`).join('\n')}
         </div>
       </div>`).join('\n')}
-      <p class="areas-note">Not listed? We cover most of Edinburgh and the Lothians — <a href="tel:${SITE.phoneIntl}">call ${SITE.phone}</a> and ask.</p>
+      <p class="areas-note">Not listed? We cover most of Edinburgh, the Lothians and south Fife — <a href="tel:${SITE.phoneIntl}">call ${SITE.phone}</a> and ask.</p>
     </div>
   </section>
 
@@ -738,11 +738,11 @@ function homeAreas() {
     <div class="container areas-inner">
       <div class="section-head">
         ${chip('Coverage')}
-        <h2>Covering Edinburgh, East Lothian &amp; Midlothian</h2>
-        <p class="section-lead">From Old Town closes and New Town townhouses to Musselburgh and Dalkeith — the same named plumber and the same upfront pricing wherever you are.</p>
+        <h2>Covering Edinburgh, the Lothians &amp; Fife</h2>
+        <p class="section-lead">From Old Town closes and New Town townhouses to Musselburgh, Dunfermline and Kirkcaldy — the same named plumber and the same upfront pricing wherever you are.</p>
       </div>
       ${areaPills(AREAS, areaUrl)}
-      <p class="areas-note">Not listed? We cover most of Edinburgh and the Lothians — just give us a call.</p>
+      <p class="areas-note">Not listed? We cover most of Edinburgh, the Lothians and south Fife — just give us a call.</p>
     </div>
   </section>
   <!-- /gen:areas -->`;
@@ -787,7 +787,7 @@ ${pages.map((p) => `  <url><loc>${SITE.url}${p.path}</loc><lastmod>${TODAY}</las
 writeFileSync(join(ROOT, '_redirects'), `# Netlify / Bolt redirects
 /services/gas-boiler-servicing/*  /services/plumbing-heating/  301!
 /services/gas-boiler-servicing    /services/plumbing-heating/  301!
-/*  /404.html  404
+/api/lead  /.netlify/functions/lead  200!
 `);
 
 console.log(`Generated ${pages.length} pages (${SERVICES.length} services × ${AREAS.length} areas).`);
