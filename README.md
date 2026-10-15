@@ -1,9 +1,9 @@
 # Dunedin Plumbing & Heating — Enhancement Plan
 
 Status: **Phases 1 (Design & Motion), 2 (Copywriting), 3 (SEO/Schema)
-and 4 (Performance & Accessibility) are built and pushed** — Phase 3's EEAT items and favicon set remain
-blocked on Phase 0 client data. Phase 4's image performance item waits on real photos. Phases 5+ are
-still planning only. This
+and 4 (Performance & Accessibility) are built and pushed, plus
+the full service/area page structure** — Phase 3's EEAT items and favicon set remain
+blocked on Phase 0 client data. Phases 5+ are still planning only. This
 file is the shared checklist — tick items off as they're approved and
 built.
 
@@ -164,34 +164,46 @@ HTML-attribute escaping across all generated pages.
 
 ---
 
-## Phase 4 — Performance & Accessibility ✅ DONE (images pending)
+## Phase 4 — Performance & Accessibility ✅ DONE
 
-- [ ] Core Web Vitals pass once real images land — **blocked on Phase 0
-      photos**. Prep done: a real `<img>` dropped inside any
-      `.img-placeholder` now fills the same box (no layout shift). When
-      adding photos use `loading="lazy" decoding="async"`, explicit
-      `width`/`height`, and WebP/AVIF.
-- [x] WCAG AA contrast check across the navy/copper/teal palette — the
-      original copper (#e8622c) only reached 3.4:1 with white, failing AA
-      for buttons and small text. Added `--copper-700` (#bf4a1a, 4.99:1)
-      and `--copper-800` (#a3401a, 6.35:1) for primary buttons, the
-      mobile call bar, skip link, links, active nav, form errors and the
-      emergency banner. Bright copper kept for icons/borders/decoration,
-      where 3:1 applies and it passes. Teal, muted text and all
-      white-on-navy text already passed.
-- [x] Full keyboard navigation + visible focus states — global
-      `:focus-visible` ring (teal on light, white on dark sections), form
-      focus ring, skip link now lands fully on screen. Mobile menu: focus
-      moves into the menu on open, Escape closes it and returns focus to
-      the toggle, clicking outside closes it.
-- [x] Screen-reader pass on nav, forms, and icon-only buttons — all
-      decorative SVGs `aria-hidden`; star glyphs hidden (rating is in the
-      text next to them); menu toggle label switches Open/Close; form
-      marks missing fields `aria-invalid`, focuses the first one and
-      announces the error via the existing live region; stat counters
-      hold their real value in the HTML (JS only animates them).
-- [x] Reduced motion now also disables smooth scrolling and hover
-      transitions site-wide.
+- [x] Real photos (35, from the client's Drive) converted to WebP at
+      480/640/960/1440px, all camera/GPS metadata stripped, served with
+      `srcset`, explicit width/height (no layout shift), lazy-loaded below
+      the fold, hero image preloaded with `fetchpriority="high"`
+- [x] Fonts self-hosted (`/assets/fonts`, OFL) — no Google Fonts requests
+- [x] `npm run build` minifies CSS/JS; `_headers` sets long cache on assets
+- [x] Lighthouse (mobile, local, uncompressed): Performance 93–97,
+      Accessibility 100, Best Practices 100, SEO 100, CLS 0
+- [x] WCAG AA contrast across the palette (copper-700/800 for text)
+- [x] Keyboard: visible focus, dropdown menus open with a button and close
+      with Escape, lightbox has arrow-key and swipe navigation
+- [x] Screen readers: decorative icons hidden, labelled carousels and menus
+
+## Site structure (generated) ✅
+
+All service and area pages are generated from `scripts/site-data.mjs` by
+`scripts/generate.mjs`. **Don't hand-edit files in `/services` or `/areas`
+— edit the data file and run `npm run generate`.** The generator also
+refreshes the header, footer, services carousel, recent work, areas and
+contact sections on `index.html` (between `<!-- gen:… -->` markers).
+
+- 11 services (no gas/boiler work): Emergency Plumbing, Leak Detection &
+  Repair, Bathroom Renovations (flagship, 23-photo gallery), Kitchen
+  Fitting, Radiator Repair & Installation, Blocked Drains & Waste Pipes,
+  Tap Repair & Installation, Water Heater Installation & Repairs, Water
+  Line Repair, Lead Pipe Replacement, General Plumbing & Heating
+- 18 areas: Leith, Portobello, Morningside, Bruntsfield, Marchmont,
+  Newington, Stockbridge, New Town, Old Town, Corstorphine, Gorgie & Dalry,
+  Murrayfield, Colinton, Liberton, Trinity & Granton, Musselburgh,
+  Dalkeith, Prestonpans
+- 198 area × service pages (`/areas/<area>/<service>/`) with copy tailored
+  to each area's housing stock, local FAQs, Service/FAQ/Breadcrumb schema
+- `/services/gas-boiler-servicing/` 301-redirects to General Plumbing &
+  Heating (`_redirects`)
+- [ ] Confirm with Kevin: kitchen fitting and blocked drains are services
+      he wants to advertise
+- [ ] Confirm `enquires@dunedinplumbing.co.uk` (from his current site) is
+      the right mailbox — the form's email fallback sends there
 
 ### Running locally / on Bolt.new
 
@@ -199,8 +211,9 @@ HTML-attribute escaping across all generated pages.
 preview the site — the site itself is still plain HTML/CSS/JS.
 
 - `npm install` then `npm run dev` → live preview with all pages
-- `npm run build` → copies the site unchanged into `dist/` for deploys
-  (publish directory: `dist`)
+- `npm run generate` → rebuilds all service/area pages from the data file
+- `npm run build` → generates, then copies + minifies into `dist/` for
+  deploys (publish directory: `dist`)
 
 ## Conversion upgrades ✅ DONE (callback form + trust strip)
 

@@ -1,0 +1,376 @@
+{
+ "bath-freestanding": {
+  "w": 3024,
+  "h": 4032,
+  "sizes": [
+   480,
+   640,
+   960,
+   1440
+  ],
+  "src": "IMG_0564.jpg"
+ },
+ "bath-scallop-1": {
+  "w": 3024,
+  "h": 4032,
+  "sizes": [
+   480,
+   640,
+   960,
+   1440
+  ],
+  "src": "IMG_2135.jpg"
+ },
+ "bath-scallop-2": {
+  "w": 3024,
+  "h": 4032,
+  "sizes": [
+   480,
+   640,
+   960,
+   1440
+  ],
+  "src": "IMG_2136.jpg"
+ },
+ "bath-scallop-3": {
+  "w": 3024,
+  "h": 4032,
+  "sizes": [
+   480,
+   640,
+   960,
+   1440
+  ],
+  "src": "IMG_2137.jpg"
+ },
+ "bath-scallop-4": {
+  "w": 3024,
+  "h": 4032,
+  "sizes": [
+   480,
+   640,
+   960,
+   1440
+  ],
+  "src": "IMG_2138.jpg"
+ },
+ "bath-scallop-5": {
+  "w": 4032,
+  "h": 3024,
+  "sizes": [
+   480,
+   640,
+   960,
+   1440
+  ],
+  "src": "IMG_2139.jpg"
+ },
+ "shower-room-1": {
+  "w": 3024,
+  "h": 4032,
+  "sizes": [
+   480,
+   640,
+   960,
+   1440
+  ],
+  "src": "IMG_3615.jpg"
+ },
+ "shower-room-2": {
+  "w": 3024,
+  "h": 4032,
+  "sizes": [
+   480,
+   640,
+   960,
+   1440
+  ],
+  "src": "IMG_3617.jpg"
+ },
+ "shower-room-3": {
+  "w": 3024,
+  "h": 4032,
+  "sizes": [
+   480,
+   640,
+   960,
+   1440
+  ],
+  "src": "IMG_3619.jpg"
+ },
+ "shower-room-4": {
+  "w": 3024,
+  "h": 4032,
+  "sizes": [
+   480,
+   640,
+   960,
+   1440
+  ],
+  "src": "IMG_3885.jpg"
+ },
+ "shower-room-5": {
+  "w": 3024,
+  "h": 4032,
+  "sizes": [
+   480,
+   640,
+   960,
+   1440
+  ],
+  "src": "IMG_3886.jpg"
+ },
+ "shower-room-6": {
+  "w": 3024,
+  "h": 4032,
+  "sizes": [
+   480,
+   640,
+   960,
+   1440
+  ],
+  "src": "IMG_3887.jpg"
+ },
+ "shower-room-7": {
+  "w": 3024,
+  "h": 4032,
+  "sizes": [
+   480,
+   640,
+   960,
+   1440
+  ],
+  "src": "IMG_3888.jpg"
+ },
+ "shower-room-8": {
+  "w": 3024,
+  "h": 4032,
+  "sizes": [
+   480,
+   640,
+   960,
+   1440
+  ],
+  "src": "IMG_3889.jpg"
+ },
+ "shower-room-9": {
+  "w": 3024,
+  "h": 4032,
+  "sizes": [
+   480,
+   640,
+   960,
+   1440
+  ],
+  "src": "IMG_3890.jpg"
+ },
+ "bath-marble-1": {
+  "w": 4284,
+  "h": 5712,
+  "sizes": [
+   480,
+   640,
+   960,
+   1440
+  ],
+  "src": "IMG_1930.heic"
+ },
+ "bath-marble-2": {
+  "w": 4284,
+  "h": 5712,
+  "sizes": [
+   480,
+   640,
+   960,
+   1440
+  ],
+  "src": "IMG_1931.heic"
+ },
+ "bath-marble-3": {
+  "w": 4284,
+  "h": 5712,
+  "sizes": [
+   480,
+   640,
+   960,
+   1440
+  ],
+  "src": "IMG_1932.heic"
+ },
+ "bath-brass-progress": {
+  "w": 3024,
+  "h": 4032,
+  "sizes": [
+   480,
+   640,
+   960,
+   1440
+  ],
+  "src": "IMG_0059.jpg"
+ },
+ "bath-brass-vanity": {
+  "w": 3024,
+  "h": 4032,
+  "sizes": [
+   480,
+   640,
+   960,
+   1440
+  ],
+  "src": "IMG_0060.jpg"
+ },
+ "wc-patterned-floor": {
+  "w": 768,
+  "h": 1599,
+  "sizes": [
+   480,
+   640
+  ],
+  "src": "5ab769f7-4f98-445d-9726-2c8de2b3750c.jpg"
+ },
+ "utility-wc": {
+  "w": 3024,
+  "h": 4032,
+  "sizes": [
+   480,
+   640,
+   960,
+   1440
+  ],
+  "src": "IMG_0787.jpg"
+ },
+ "kitchen-belfast-sink": {
+  "w": 1599,
+  "h": 899,
+  "sizes": [
+   480,
+   640,
+   960,
+   1440
+  ],
+  "src": "abcd3233-fd41-46dc-9aeb-9f9e50f779ff.jpg"
+ },
+ "kitchen-sink-fitting": {
+  "w": 1599,
+  "h": 899,
+  "sizes": [
+   480,
+   640,
+   960,
+   1440
+  ],
+  "src": "02362be4-0c01-479d-8986-0f92182784e2.jpg"
+ },
+ "kitchen-sink-unit": {
+  "w": 1599,
+  "h": 899,
+  "sizes": [
+   480,
+   640,
+   960,
+   1440
+  ],
+  "src": "65d4c5b5-24e6-4e7a-8b20-17a2b33a1ffc.jpg"
+ },
+ "kitchen-water-heater": {
+  "w": 1200,
+  "h": 1600,
+  "sizes": [
+   480,
+   640,
+   960
+  ],
+  "src": "a9541628-b4be-4df3-b174-81f2ac7b8c05.jpg"
+ },
+ "radiator-column": {
+  "w": 1200,
+  "h": 1600,
+  "sizes": [
+   480,
+   640,
+   960
+  ],
+  "src": "5731425f-0bd2-4a99-bd6a-ad186a289d0d.jpg"
+ },
+ "radiator-vertical": {
+  "w": 1200,
+  "h": 1600,
+  "sizes": [
+   480,
+   640,
+   960
+  ],
+  "src": "944dcc73-b8c8-479e-be55-e9aba458cd73.jpg"
+ },
+ "copper-supply-valves": {
+  "w": 1200,
+  "h": 1600,
+  "sizes": [
+   480,
+   640,
+   960
+  ],
+  "src": "51c1950d-1c9b-48d5-8ad0-9108d3aefb47.jpg"
+ },
+ "copper-riser": {
+  "w": 1200,
+  "h": 1600,
+  "sizes": [
+   480,
+   640,
+   960
+  ],
+  "src": "26bc34f9-297d-47c0-9eaf-4bb916602125.jpg"
+ },
+ "first-fix-supply-waste": {
+  "w": 1200,
+  "h": 1600,
+  "sizes": [
+   480,
+   640,
+   960
+  ],
+  "src": "c6a922de-4f0f-49e2-9551-2fc28589509f.jpg"
+ },
+ "floor-waste": {
+  "w": 1200,
+  "h": 1600,
+  "sizes": [
+   480,
+   640,
+   960
+  ],
+  "src": "57c957b7-682e-44f7-9852-5f90b73437fc.jpg"
+ },
+ "cracked-basin": {
+  "w": 1536,
+  "h": 2048,
+  "sizes": [
+   480,
+   640,
+   960,
+   1440
+  ],
+  "src": "a490362b-36dd-41eb-8bdc-8b537753b598.jpg"
+ },
+ "fitout-first-fix": {
+  "w": 1200,
+  "h": 1600,
+  "sizes": [
+   480,
+   640,
+   960
+  ],
+  "src": "57573654-85b6-483d-b006-bfb230bb8189.jpg"
+ },
+ "fitout-partitions": {
+  "w": 1200,
+  "h": 1600,
+  "sizes": [
+   480,
+   640,
+   960
+  ],
+  "src": "81ce8a99-e7dd-4741-8dd6-52fa05d8ef67.jpg"
+ }
+}

@@ -7,8 +7,9 @@
   "scripts": {
     "dev": "vite",
     "start": "vite",
-    "build": "node scripts/build.mjs",
-    "preview": "vite preview"
+    "build": "node scripts/generate.mjs && node scripts/build.mjs",
+    "preview": "vite preview",
+    "generate": "node scripts/generate.mjs"
   },
   "devDependencies": {
     "vite": "^6.0.0"

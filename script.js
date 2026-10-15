@@ -16,7 +16,10 @@ document.addEventListener('DOMContentLoaded', () => {
   initCounters();
   initScrollspy();
   initHeroParallax();
-  document.getElementById('year').textContent = new Date().getFullYear();
+  initSubmenus();
+  initLightbox();
+  const year = document.getElementById('year');
+  if (year) year.textContent = new Date().getFullYear();
 });
 
 function initMobileNav() {
@@ -523,4 +526,100 @@ function initHeroParallax() {
       ticking = true;
     }
   }, { passive: true });
+}
+
+// Dropdown menus (Services / Areas). Hover + focus open them on desktop via
+// CSS; the chevron button toggles them for touch, keyboard and the mobile menu.
+function initSubmenus() {
+  const items = document.querySelectorAll('.nav-item.has-sub');
+  if (!items.length) return;
+  const closeAll = (except) => items.forEach((item) => {
+    if (item === except) return;
+    item.classList.remove('is-open');
+    const btn = item.querySelector('.sub-toggle');
+    if (btn) btn.setAttribute('aria-expanded', 'false');
+  });
+  items.forEach((item) => {
+    const btn = item.querySelector('.sub-toggle');
+    if (!btn) return;
+    btn.addEventListener('click', (event) => {
+      event.stopPropagation();
+      const open = !item.classList.contains('is-open');
+      closeAll(item);
+      item.classList.toggle('is-open', open);
+      btn.setAttribute('aria-expanded', String(open));
+    });
+  });
+  document.addEventListener('click', (event) => {
+    if (!event.target.closest('.nav-item.has-sub')) closeAll();
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape') return;
+    const open = document.querySelector('.nav-item.is-open');
+    if (open) {
+      closeAll();
+      const btn = open.querySelector('.sub-toggle');
+      if (btn) btn.focus();
+    }
+  });
+}
+
+// Photo lightbox for gallery links (links still open the image without JS).
+function initLightbox() {
+  const links = Array.from(document.querySelectorAll('a[data-lightbox]'));
+  if (!links.length || typeof HTMLDialogElement === 'undefined') return;
+
+  const dialog = document.createElement('dialog');
+  dialog.className = 'lightbox';
+  dialog.setAttribute('aria-label', 'Photo viewer');
+  dialog.innerHTML = `<div class="lightbox-inner">
+      <img alt="">
+      <p class="lightbox-cap"></p>
+      <button type="button" class="lb-btn lb-close" aria-label="Close photo">&times;</button>
+      <button type="button" class="lb-btn lb-prev" aria-label="Previous photo">&#8249;</button>
+      <button type="button" class="lb-btn lb-next" aria-label="Next photo">&#8250;</button>
+    </div>`;
+  document.body.appendChild(dialog);
+  const imgEl = dialog.querySelector('img');
+  const cap = dialog.querySelector('.lightbox-cap');
+  let group = [];
+  let index = 0;
+
+  const show = (i) => {
+    index = (i + group.length) % group.length;
+    const link = group[index];
+    imgEl.src = link.getAttribute('href');
+    imgEl.alt = link.dataset.caption || '';
+    cap.textContent = `${link.dataset.caption || ''}  (${index + 1} of ${group.length})`;
+    const single = group.length < 2;
+    dialog.querySelector('.lb-prev').hidden = single;
+    dialog.querySelector('.lb-next').hidden = single;
+  };
+
+  links.forEach((link) => {
+    link.addEventListener('click', (event) => {
+      event.preventDefault();
+      group = links.filter((l) => l.dataset.lightbox === link.dataset.lightbox);
+      show(group.indexOf(link));
+      dialog.showModal();
+    });
+  });
+  dialog.querySelector('.lb-close').addEventListener('click', () => dialog.close());
+  dialog.querySelector('.lb-prev').addEventListener('click', () => show(index - 1));
+  dialog.querySelector('.lb-next').addEventListener('click', () => show(index + 1));
+  dialog.addEventListener('click', (event) => { if (event.target === dialog || event.target.classList.contains('lightbox-inner')) dialog.close(); });
+  dialog.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowLeft') show(index - 1);
+    if (event.key === 'ArrowRight') show(index + 1);
+  });
+
+  // Swipe on touch screens.
+  let startX = null;
+  dialog.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; }, { passive: true });
+  dialog.addEventListener('touchend', (e) => {
+    if (startX === null) return;
+    const dx = e.changedTouches[0].clientX - startX;
+    if (Math.abs(dx) > 50) show(index + (dx < 0 ? 1 : -1));
+    startX = null;
+  });
 }
