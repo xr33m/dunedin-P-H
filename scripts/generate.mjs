@@ -1,7 +1,7 @@
 // ---------------------------------------------------------------------------
 // Static page generator — run with `npm run generate`.
 // Builds: /services/*, /areas/*, /areas/<area>/<service>/, sitemap.xml,
-// _redirects, and refreshes the shared header/footer/sections on index.html
+// and refreshes the shared header/footer/sections on index.html
 // and 404.html (between <!-- gen:NAME --> markers).
 // ---------------------------------------------------------------------------
 import { readFileSync, writeFileSync, mkdirSync, rmSync, existsSync, readdirSync } from 'node:fs';
@@ -784,10 +784,6 @@ ${pages.map((p) => `  <url><loc>${SITE.url}${p.path}</loc><lastmod>${TODAY}</las
 </urlset>
 `);
 
-writeFileSync(join(ROOT, '_redirects'), `# Netlify / Bolt redirects
-/services/gas-boiler-servicing/*  /services/plumbing-heating/  301!
-/services/gas-boiler-servicing    /services/plumbing-heating/  301!
-/api/lead  /.netlify/functions/lead  200!
-`);
+// Redirects and headers live in vercel.json.
 
 console.log(`Generated ${pages.length} pages (${SERVICES.length} services × ${AREAS.length} areas).`);

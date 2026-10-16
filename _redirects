@@ -1,4 +1,0 @@
-# Netlify / Bolt redirects
-/services/gas-boiler-servicing/*  /services/plumbing-heating/  301!
-/services/gas-boiler-servicing    /services/plumbing-heating/  301!
-/api/lead  /.netlify/functions/lead  200!

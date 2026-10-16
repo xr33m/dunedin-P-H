@@ -171,7 +171,7 @@ HTML-attribute escaping across all generated pages.
       `srcset`, explicit width/height (no layout shift), lazy-loaded below
       the fold, hero image preloaded with `fetchpriority="high"`
 - [x] Fonts self-hosted (`/assets/fonts`, OFL) — no Google Fonts requests
-- [x] `npm run build` minifies CSS/JS; `_headers` sets long cache on assets
+- [x] `npm run build` minifies CSS/JS; `vercel.json` sets long cache on assets
 - [x] Lighthouse (mobile, local, uncompressed): Performance 93–97,
       Accessibility 100, Best Practices 100, SEO 100, CLS 0
 - [x] WCAG AA contrast across the palette (copper-700/800 for text)
@@ -200,7 +200,7 @@ contact sections on `index.html` (between `<!-- gen:… -->` markers).
 - 264 area × service pages (`/areas/<area>/<service>/`) with copy tailored
   to each area's housing stock, local FAQs, Service/FAQ/Breadcrumb schema
 - `/services/gas-boiler-servicing/` 301-redirects to General Plumbing &
-  Heating (`_redirects`)
+  Heating (`vercel.json`)
 - [ ] Confirm with Kevin: kitchen fitting and blocked drains are services
       he wants to advertise
 - [x] Site email is dunedinph@gmail.com
@@ -213,7 +213,7 @@ preview the site — the site itself is still plain HTML/CSS/JS.
 - `npm install` then `npm run dev` → live preview with all pages
 - `npm run generate` → rebuilds all service/area pages from the data file
 - `npm run build` → generates, then copies + minifies into `dist/` for
-  deploys (publish directory: `dist`)
+  deploys (Vercel output directory: `dist`)
 
 ## Conversion upgrades ✅ DONE (callback form + trust strip)
 
@@ -223,8 +223,8 @@ preview the site — the site itself is still plain HTML/CSS/JS.
       postcode/email/details. Emergency choice shows a "call now" prompt.
       Validates phone numbers, flags errors for screen readers, has a
       spam honeypot, and shows a confirmation with the chosen callback time.
-- [x] **Form connected** — both forms POST to `/api/lead`, a Netlify
-      function (`netlify/functions/lead.mjs`) that validates and forwards
+- [x] **Form connected** — both forms POST to `/api/lead`, a Vercel
+      serverless function (`api/lead.js`) that validates and forwards
       to the Airtable automation "Website lead → Leads + email Kevin" in
       the **Dunedin Plumbing & Heating CRM** base. It saves the lead
       (Status = New) and emails dunedinph@gmail.com. Where the function
@@ -232,8 +232,9 @@ preview the site — the site itself is still plain HTML/CSS/JS.
       visitor's email app addressed to dunedinph@gmail.com.
       Payload keys: name, phone, email, postcode, urgency, service, day,
       date, time, message, page, lead_source, submitted_at.
-- [ ] Hosting must be Netlify (functions + `_redirects`). The Airtable
-      automation must be switched on in Airtable.
+- [x] Hosting: **Vercel**. `vercel.json` sets the build (`npm run build`
+      → `dist`), the boiler-page 301 redirect and cache headers. The
+      `/api` folder is deployed as serverless functions automatically.
 - [x] **Trust strip on every page** — 5.0★ / 25 Google reviews, 24/7,
       price agreed before we start, named plumber; reassurance line under
       every submit button.

@@ -8,7 +8,7 @@ const ROOT = process.cwd();
 const OUT = join(ROOT, 'dist');
 const SKIP = new Set([
   'dist', 'node_modules', 'scripts', '.git', '.bolt', '.gitignore',
-  'package.json', 'package-lock.json', 'vite.config.js', 'README.md', 'netlify', 'netlify.toml',
+  'package.json', 'package-lock.json', 'vite.config.js', 'README.md', 'api', 'vercel.json',
 ]);
 
 rmSync(OUT, { recursive: true, force: true });
