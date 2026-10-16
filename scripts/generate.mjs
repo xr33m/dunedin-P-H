@@ -110,6 +110,7 @@ function header({ home = false, contact = '#contact' } = {}) {
           </ul>
         </div>
       </div>
+      <a href="/about/">About</a>
       <a href="${h('reviews')}">Reviews</a>
       <a href="${contact}">Contact</a>
     </nav>
@@ -160,6 +161,7 @@ function footer({ home = false, contact = '#contact' } = {}) {
       <a href="tel:${SITE.phoneIntl}">${SITE.phone}</a>
       <a href="mailto:${SITE.email}">${SITE.email}</a>
       <span>Open 24 hours</span>
+      <a href="/about/">About us</a>
       <a href="${h('reviews')}">Reviews</a>
       <a href="${contact}">Book a callback</a>
     </div>
@@ -684,6 +686,161 @@ ${emergency(a.name)}
   write(path, shell({ place: a.name, path, title: metaTitle(s.name, a.name, s.kw, kwOf(s.related[0]), kwOf(s.related[1])), description: trim(`${s.name} in ${a.name} (${a.postcodes}) from a 5-star rated local plumber. ${s.short} Call ${SITE.phone}.`), body, schema, preload: s.photo, ogImage: largest(s.photo) }), '0.6');
 }
 
+// ---------- About page ----------
+function aboutPage() {
+  const path = '/about/';
+  const crumbs = [['Home', '/'], ['About', path]];
+  const featured = ['emergency-plumbing', 'bathroom-renovations', 'leak-repair'].map((x) => svcBy[x]);
+  const stories = [
+    ['Margaret Miller', 'bath-scallop-1', 'Reliable, on time, never overcharges'],
+    ['Gabriela Popova', 'copper-supply-valves', 'At our door within the hour'],
+    ['Margaret Mckay', 'shower-room-8', 'A very professional bathroom refit'],
+    ['Andrew Jamieson', 'radiator-column', 'First-class service, every time'],
+  ];
+  const pricing = [
+    ['Emergency call-outs', 'Made safe first — price agreed before the permanent fix', 'emergency-plumbing'],
+    ['Bathroom renovations', 'One fixed price after we’ve seen the room', 'bathroom-renovations'],
+    ['Leaks, taps and repairs', 'A straight price on the first call for most jobs', 'leak-repair'],
+  ];
+  const body = `  <section class="section about-intro">
+    <div class="container">
+      ${breadcrumb(crumbs).replace('class="breadcrumb"', 'class="breadcrumb on-light"')}
+      ${chip('Our story')}
+      <h1 class="about-h1">About Dunedin Plumbing &amp; Heating<span class="h1-benefit"><span class="sr-only"> — </span>Edinburgh’s Honest, Local Plumber</span></h1>
+      ${photoBox('kitchen-sink-fitting', 'Belfast sink being fitted between new kitchen units by Dunedin Plumbing & Heating', ' about-banner', { eager: true, sizes: '(max-width: 1200px) 100vw, 1160px' })}
+    </div>
+  </section>
+
+  <section class="section about-story">
+    <div class="container about-story-grid">
+      <h2 class="story-h2"><span class="chip-icon" aria-hidden="true">${icon('drip')}</span>Our Story: An Edinburgh Plumber Built on Repeat Customers</h2>
+      <div>
+        <p class="about-statement">At Dunedin Plumbing &amp; Heating, we fix leaks, refit bathrooms and keep heating running across Edinburgh, the Lothians and Fife. <span>Every job gets the same thing: a named plumber who turns up, explains the problem straight, and agrees the price before a single tool comes out.</span></p>
+        <p class="body-copy">We didn’t grow by advertising — we grew because people who used us once called us again, for the next tap, the next radiator, the next renovation. Landlords trust us with their properties, families call us at 11pm when a pipe bursts, and neighbours pass our number along. That’s the whole model, and we protect it on every job.</p>
+      </div>
+    </div>
+    <div class="container stagger-cards">
+      <div class="stagger-card is-accent"><span class="stagger-icon">${icon('bolt')}</span><h3>Fast response</h3><p>Same-day for most jobs, 24/7 for genuine emergencies.</p></div>
+      <div class="stagger-card"><span class="stagger-icon">${icon('pin')}</span><h3>A named plumber</h3><p>Kevin and the team — never a call centre or a stranger.</p></div>
+      <div class="stagger-card"><span class="stagger-icon">${icon('check')}</span><h3>Price agreed first</h3><p>You know the cost before work starts. No surprises on the bill.</p></div>
+      <div class="stagger-card"><span class="stagger-icon">${icon('drip')}</span><h3>${SITE.rating}★ on Google</h3><p>${SITE.reviewCount} five-star reviews from Edinburgh customers.</p></div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container about-split">
+      <div class="about-media">${photoBox('shower-room-7', 'Black-framed shower enclosure and vanity in a Dunedin bathroom renovation', ' about-photo', { sizes: '(max-width: 980px) 100vw, 560px' })}</div>
+      <div class="about-copy">
+        ${chip('Our mission')}
+        <h2>Plumbing Done Properly, Priced Honestly — Every Time</h2>
+        <p class="body-copy">To be the Edinburgh plumber people recommend without thinking twice: on time, clear about the options, tidy in your home, and still reachable long after the invoice is paid.</p>
+        <ul class="check-list">
+          <li>${icon('check')}<span>Turn up when we say we will</span></li>
+          <li>${icon('check')}<span>Explain the problem in plain English</span></li>
+          <li>${icon('check')}<span>Agree one price before work starts</span></li>
+          <li>${icon('check')}<span>Leave your home as we found it</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container what-grid">
+      <div>
+        ${chip('What we do')}
+        <h2>Plumbing and Heating Across Edinburgh, the Lothians &amp; Fife</h2>
+        <p class="body-copy">Eleven services, one standard — from a dripping tap to a full bathroom renovation.</p>
+        <a href="/services/" class="btn btn-outline">Explore all services ${ARROW}</a>
+      </div>
+      <div class="what-cards">
+${featured.map((x, i) => `        <a class="what-card${i === 1 ? ' is-accent' : ''}" href="${svcUrl(x)}">
+          <span class="stagger-icon">${icon(x.icon)}</span>
+          <span class="what-text"><strong>${esc(x.name)}</strong><span>${esc(x.short)}</span></span>
+          <span class="what-arrow">${ARROW}</span>
+        </a>`).join('\n')}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-head section-head-split">
+        <div>
+          ${chip('Honest pricing')}
+          <h2>Pricing That Matches Our Promise</h2>
+        </div>
+        <a href="#contact" class="btn btn-outline">Get a price ${ARROW}</a>
+      </div>
+      <div class="price-grid">
+        <div class="price-rows">
+${pricing.map(([t, d, slug], i) => `          <a class="price-row${i === 0 ? ' is-accent' : ''}" href="${svcUrl(svcBy[slug])}">
+            <strong>${esc(t)}</strong><span>${esc(d)}</span><span class="what-arrow">${ARROW}</span>
+          </a>`).join('\n')}
+        </div>
+        ${photoBox('kitchen-water-heater', 'Neatly plumbed under-sink water heater and filter in a kitchen cupboard', ' price-photo', { sizes: '(max-width: 980px) 100vw, 300px' })}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head" style="text-align:left;margin-left:0">
+        ${chip('Our values')}
+        <h2>Built on Honest Work, Job After Job</h2>
+      </div>
+      <div class="values-grid">
+        <div class="value-card is-accent"><span class="value-num">01.</span><h3>Honesty</h3><p>We tell you what actually needs doing — and what can wait. No scare tactics, no upsell, no invented extras.</p></div>
+        <div class="value-card"><span class="value-num">02.</span><h3>Quality</h3><p>Proper materials, proper fittings and work that’s still standing years later — on a ten-minute tap fix or a full refit.</p></div>
+        <div class="value-card"><span class="value-num">03.</span><h3>Accountability</h3><p>Same named plumber, same phone number. If something isn’t right after we’ve gone, you call us, not a stranger.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt" id="reviews">
+    <div class="container">
+      <div class="section-head">
+        ${chip('Client feedback')}
+        <h2>What Edinburgh Customers Say About Kevin</h2>
+      </div>
+      <div class="carousel story-carousel" data-carousel>
+        <div class="carousel-track" role="list" aria-label="Customer stories">
+${stories.map(([n, photo, headline]) => `          <div class="story-card" role="listitem">
+            ${photoBox(photo, 'A Dunedin Plumbing & Heating job', ' story-photo', { sizes: '(max-width: 780px) 100vw, 460px' })}
+            <div class="story-body">
+              <p class="story-label">Google review · <span class="stars" aria-hidden="true">★★★★★</span><span class="sr-only">5 out of 5 stars</span></p>
+              <p class="story-headline">“${esc(headline)}”</p>
+              <p class="story-quote">“${esc(REVIEWS[n])}”</p>
+              <p class="story-name">${esc(n)}</p>
+            </div>
+          </div>`).join('\n')}
+        </div>
+        <div class="carousel-controls">
+          <button type="button" class="carousel-btn carousel-prev" aria-label="Previous story"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="carousel-dots" aria-hidden="true"></div>
+          <button type="button" class="carousel-btn carousel-next" aria-label="Next story"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-banner">
+    ${img('bath-marble-2', '', { sizes: '100vw', cls: 'cta-bg' }).replace('alt=""', 'alt="" aria-hidden="true"')}
+    <div class="container cta-inner">
+      <div>
+        ${chip('Get in touch', true)}
+        <h2>Need a Plumber in Edinburgh? We’re Ready to Help.</h2>
+      </div>
+      <a href="#contact" class="btn btn-primary btn-lg">Book a Callback ${ARROW}</a>
+    </div>
+  </section>`;
+  const schema = [
+    businessNode(),
+    { '@type': 'AboutPage', name: 'About Dunedin Plumbing & Heating', url: SITE.url + path, about: { '@id': `${SITE.url}/#business` } },
+    breadcrumbSchema(crumbs),
+  ];
+  write(path, shell({ path, title: metaTitle('Local Plumber', 'Edinburgh', 'plumbing', 'leak repair', 'radiator repair'), description: trim(`About Dunedin Plumbing & Heating: a named, local Edinburgh plumber with ${SITE.reviewCount} five-star Google reviews. On time, price agreed before we start, 24/7 emergencies. Call ${SITE.phone}.`), body, schema, preload: 'kitchen-sink-fitting' }), '0.7');
+}
+
 // ---------- homepage / 404 sections ----------
 function homeServices() {
   return `<!-- gen:services -->
@@ -775,6 +932,7 @@ pages.push({ path: '/', priority: '1.0' });
 servicesIndex();
 SERVICES.forEach(servicePage);
 areasIndex();
+aboutPage();
 AREAS.forEach(areaHub);
 AREAS.forEach((a) => SERVICES.forEach((s) => comboPage(a, s)));
 
