@@ -67,6 +67,13 @@ function img(name, alt, { sizes = '(max-width: 780px) 100vw, 400px', eager = fal
 const largest = (name) => `/assets/img/${name}-${IMAGES[name].sizes.at(-1)}.webp`;
 const photoBox = (name, alt, cls = '', opts = {}) => `<div class="img-placeholder has-img${cls}">${img(name, alt, opts)}</div>`;
 
+// Meta title formula (agency SOP):
+// "BEST [primary] [place], if you're looking for [primary], [secondary] or
+//  [secondary] services near me then Dunedin Plumbing & Heating is the best company to use"
+const metaTitle = (primary, place, kw1, kw2, kw3) =>
+  `BEST ${primary} ${place}, if you're looking for ${kw1}, ${kw2} or ${kw3} services near me then ${SITE.name} is the best company to use`;
+const kwOf = (slug) => svcBy[slug].kw;
+
 const svcUrl = (s) => `/services/${s.slug}/`;
 const areaUrl = (a) => `/areas/${a.slug}/`;
 const comboUrl = (a, s) => `/areas/${a.slug}/${s.slug}/`;
@@ -490,7 +497,7 @@ ${relatedSvcs.map((r) => svcCard(r, svcUrl(r), undefined, 'Edinburgh')).join('\n
     faqSchema(s.faqs),
     breadcrumbSchema(crumbs),
   ];
-  write(path, shell({ path, title: `${s.name} Edinburgh | Dunedin Plumbing & Heating`, description: trim(`${s.name} in Edinburgh from a 5-star rated local plumber. ${s.short} Call ${SITE.phone}.`), body, schema, preload: s.heroPhoto || s.photo, ogImage: largest(s.heroPhoto || s.photo) }), '0.9');
+  write(path, shell({ path, title: metaTitle(s.name, 'Edinburgh', s.kw, kwOf(s.related[0]), kwOf(s.related[1])), description: trim(`${s.name} in Edinburgh from a 5-star rated local plumber. ${s.short} Call ${SITE.phone}.`), body, schema, preload: s.heroPhoto || s.photo, ogImage: largest(s.heroPhoto || s.photo) }), '0.9');
 }
 
 function servicesIndex() {
@@ -514,7 +521,7 @@ ${SERVICES.map((s) => svcCard(s)).join('\n')}
 
 ${emergency()}`;
   const schema = [businessNode(), breadcrumbSchema(crumbs)];
-  write(path, shell({ path, title: 'Plumbing Services Edinburgh | Dunedin Plumbing & Heating', description: trim(`Emergency plumbing, leak repairs, bathroom renovations, kitchens, radiators, drains and more across Edinburgh and the Lothians. 5.0★ from ${SITE.reviewCount} Google reviews.`), body, schema, preload: 'shower-room-8' }), '0.8');
+  write(path, shell({ path, title: metaTitle('Plumbing Services', 'Edinburgh', 'emergency plumbing', 'leak repair', 'bathroom renovation'), description: trim(`Emergency plumbing, leak repairs, bathroom renovations, kitchens, radiators, drains and more across Edinburgh and the Lothians. 5.0★ from ${SITE.reviewCount} Google reviews.`), body, schema, preload: 'shower-room-8' }), '0.8');
 }
 
 function areaHub(a) {
@@ -585,7 +592,7 @@ ${emergency(a.name)}
     faqSchema(faqs),
     breadcrumbSchema(crumbs),
   ];
-  write(path, shell({ place: a.name, path, title: `Plumber in ${a.name} (${a.postcodes}) | Dunedin Plumbing & Heating`, description: trim(`Trusted local plumber in ${a.name}, ${a.region}. Emergency call-outs 24/7, leak repairs, bathrooms, kitchens and radiators. 5.0★ from ${SITE.reviewCount} Google reviews. Call ${SITE.phone}.`), body, schema, preload: pickPhoto }), '0.8');
+  write(path, shell({ place: a.name, path, title: metaTitle('Plumber', a.name, 'plumbing', 'emergency plumbing', 'leak repair'), description: trim(`Trusted local plumber in ${a.name}, ${a.region}. Emergency call-outs 24/7, leak repairs, bathrooms, kitchens and radiators. 5.0★ from ${SITE.reviewCount} Google reviews. Call ${SITE.phone}.`), body, schema, preload: pickPhoto }), '0.8');
 }
 
 function areasIndex() {
@@ -614,7 +621,7 @@ ${AREAS.filter((a) => a.region === r).map((a) => `          <a class="area-card"
 
 ${emergency()}`;
   const schema = [businessNode({ areaServed: AREAS.map((a) => ({ '@type': 'Place', name: `${a.name}, ${a.region}` })) }), breadcrumbSchema(crumbs)];
-  write(path, shell({ path, title: 'Areas We Cover | Edinburgh Plumber | Dunedin Plumbing & Heating', description: trim(`Local plumber covering ${AREAS.slice(0, 8).map((a) => a.name).join(', ')} and more across Edinburgh and the Lothians. 24/7 emergency call-outs.`), body, schema, preload: 'bath-scallop-1' }), '0.7');
+  write(path, shell({ path, title: metaTitle('Plumbers', 'Edinburgh, the Lothians & Fife', 'plumbing', 'emergency plumbing', 'bathroom renovation'), description: trim(`Local plumber covering ${AREAS.slice(0, 8).map((a) => a.name).join(', ')} and more across Edinburgh and the Lothians. 24/7 emergency call-outs.`), body, schema, preload: 'bath-scallop-1' }), '0.7');
 }
 
 function comboPage(a, s) {
@@ -679,7 +686,7 @@ ${emergency(a.name)}
     faqSchema(faqs),
     breadcrumbSchema(crumbs),
   ];
-  write(path, shell({ place: a.name, path, title: `${s.name} in ${a.name} | Dunedin Plumbing & Heating`, description: trim(`${s.name} in ${a.name} (${a.postcodes}) from a 5-star rated local plumber. ${s.short} Call ${SITE.phone}.`), body, schema, preload: s.photo, ogImage: largest(s.photo) }), '0.6');
+  write(path, shell({ place: a.name, path, title: metaTitle(s.name, a.name, s.kw, kwOf(s.related[0]), kwOf(s.related[1])), description: trim(`${s.name} in ${a.name} (${a.postcodes}) from a 5-star rated local plumber. ${s.short} Call ${SITE.phone}.`), body, schema, preload: s.photo, ogImage: largest(s.photo) }), '0.6');
 }
 
 // ---------- homepage / 404 sections ----------

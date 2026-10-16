@@ -45,6 +45,7 @@ export const SERVICES = [
   {
     slug: 'emergency-plumbing',
     name: 'Emergency Plumbing',
+    kw: 'emergency plumbing',
     benefit: '24/7, With a Real Person Answering',
     short: 'Burst pipes, leaks through the ceiling, no water — answered 24 hours a day.',
     icon: 'bolt',
@@ -76,6 +77,7 @@ export const SERVICES = [
   {
     slug: 'leak-repair',
     name: 'Leak Detection & Repair',
+    kw: 'leak repair',
     benefit: 'Found at the Source, Fixed Properly',
     short: 'Drips, damp patches and mystery leaks traced to the source and fixed properly.',
     icon: 'drop',
@@ -107,6 +109,7 @@ export const SERVICES = [
   {
     slug: 'bathroom-renovations',
     name: 'Bathroom Renovations',
+    kw: 'bathroom renovation',
     benefit: 'Designed With You, Priced Once',
     short: 'Full bathroom and shower room refits — planned, priced once and built properly.',
     icon: 'bath',
@@ -148,6 +151,7 @@ export const SERVICES = [
   {
     slug: 'kitchen-fitting',
     name: 'Kitchen Fitting',
+    kw: 'kitchen fitting',
     benefit: 'Plumbed Properly From Day One',
     short: 'Sinks, taps, appliances and the plumbing behind a new kitchen, fitted properly.',
     icon: 'sink',
@@ -182,6 +186,7 @@ export const SERVICES = [
   {
     slug: 'radiator-maintenance',
     name: 'Radiator Repair & Installation',
+    kw: 'radiator repair',
     benefit: 'Warm, Even Heat in Every Room',
     short: 'Cold spots fixed, radiators balanced, new and designer radiators fitted.',
     icon: 'radiator',
@@ -216,6 +221,7 @@ export const SERVICES = [
   {
     slug: 'blocked-drains',
     name: 'Blocked Drains & Waste Pipes',
+    kw: 'blocked drain',
     benefit: 'Cleared Fast and Kept Clear',
     short: 'Slow sinks, blocked toilets and waste pipes cleared — and stopped coming back.',
     icon: 'drain',
@@ -247,6 +253,7 @@ export const SERVICES = [
   {
     slug: 'tap-repair-installation',
     name: 'Tap Repair & Installation',
+    kw: 'tap repair',
     benefit: 'Fixed Properly the First Time',
     short: 'Dripping taps fixed and new taps fitted — kitchen, bathroom or outdoors.',
     icon: 'tap',
@@ -278,6 +285,7 @@ export const SERVICES = [
   {
     slug: 'water-heater-installation-repair',
     name: 'Water Heater Installation & Repairs',
+    kw: 'water heater repair',
     benefit: 'Hot Water Back, Fast',
     short: 'No hot water fixed fast, and the right new system fitted when it’s time.',
     icon: 'heater',
@@ -309,6 +317,7 @@ export const SERVICES = [
   {
     slug: 'water-line-repair',
     name: 'Water Line Repair',
+    kw: 'water line repair',
     benefit: 'Fast Repairs, Neighbours Kept Informed',
     short: 'Mains and supply pipes repaired fast, with everyone affected kept informed.',
     icon: 'pipe',
@@ -340,6 +349,7 @@ export const SERVICES = [
   {
     slug: 'lead-replacement',
     name: 'Lead Pipe Replacement',
+    kw: 'lead pipe replacement',
     benefit: 'Honest Checks, Safe Modern Pipework',
     short: 'Old lead supply pipes identified honestly and replaced with modern pipework.',
     icon: 'lead',
@@ -371,6 +381,7 @@ export const SERVICES = [
   {
     slug: 'plumbing-heating',
     name: 'General Plumbing & Heating',
+    kw: 'plumbing and heating',
     benefit: 'Same-Day for Most Jobs, Price Agreed First',
     short: 'Low pressure, noisy pipes, showers, toilets and pipework — the everyday jobs.',
     icon: 'wrench',
