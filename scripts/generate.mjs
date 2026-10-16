@@ -86,14 +86,8 @@ function header({ home = false, contact = '#contact' } = {}) {
   return `<!-- gen:header -->
 <header class="site-header" id="siteHeader">
   <div class="container header-inner">
-    <a href="${home ? '#top' : '/'}" class="brand" aria-label="Dunedin Plumbing &amp; Heating — home">
-      <span class="brand-mark" aria-hidden="true">
-        ${BRAND_MARK}
-      </span>
-      <span class="brand-text">
-        <span class="brand-name">Dunedin</span>
-        <span class="brand-sub">Plumbing &amp; Heating</span>
-      </span>
+    <a href="${home ? '#top' : '/'}" class="brand brand-logo" aria-label="Dunedin Plumbing &amp; Heating — home">
+      <img src="/assets/logo-160.webp" srcset="/assets/logo-96.webp 96w, /assets/logo-160.webp 160w, /assets/logo-240.webp 240w" sizes="80px" width="80" height="78" alt="Dunedin Plumbing &amp; Heating" fetchpriority="high">
     </a>
 
     <nav class="main-nav" id="mainNav" aria-label="Primary">
@@ -141,11 +135,10 @@ function footer({ home = false, contact = '#contact' } = {}) {
 <footer class="site-footer">
   <div class="container footer-inner">
     <div class="footer-brand">
-      <span class="brand-mark" aria-hidden="true">
-        ${BRAND_MARK}
-      </span>
+      <a href="/" class="footer-logo" aria-label="Dunedin Plumbing &amp; Heating — home">
+        <img src="/assets/logo-160.webp" srcset="/assets/logo-160.webp 160w, /assets/logo-240.webp 240w" sizes="120px" width="120" height="116" alt="Dunedin Plumbing &amp; Heating" loading="lazy" decoding="async">
+      </a>
       <div>
-        <p class="brand-name">Dunedin Plumbing &amp; Heating</p>
         <p class="footer-tagline">Honest, local plumbing across Edinburgh, the Lothians and Fife.</p>
         <p class="footer-rating"><span class="stars" aria-hidden="true">★★★★★</span> ${SITE.rating} from ${SITE.reviewCount} Google reviews</p>
       </div>
@@ -361,6 +354,7 @@ const businessNode = (extra = {}) => ({
   telephone: SITE.phoneIntl,
   email: SITE.email,
   image: `${SITE.url}${largest('bath-freestanding')}`,
+  logo: `${SITE.url}/assets/logo.png`,
   priceRange: '££',
   address: { '@type': 'PostalAddress', addressLocality: 'Edinburgh', addressCountry: 'GB' },
   openingHoursSpecification: [{ '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'], opens: '00:00', closes: '23:59' }],
@@ -388,7 +382,8 @@ function shell({ path, title, description, body, schema = [], preload, home = fa
 <meta property="og:image" content="${SITE.url}${og}">
 <meta property="og:locale" content="en_GB">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/barlow-condensed-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 ${preload ? `<link rel="preload" as="image" href="/assets/img/${preload}-960.webp" imagesrcset="${IMAGES[preload].sizes.map((w) => `/assets/img/${preload}-${w}.webp ${w}w`).join(', ')}" imagesizes="(max-width: 980px) 100vw, 520px" fetchpriority="high">\n` : ''}<link rel="stylesheet" href="/style.css">

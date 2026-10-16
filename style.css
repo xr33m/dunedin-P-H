@@ -1715,3 +1715,27 @@ details.faq-item p { padding: 0 20px 18px; margin: 0; color: var(--text-muted); 
   color: #fff; margin: 0 0 16px;
 }
 .emergency-inner p strong { color: #fff; }
+
+/* Brand logo */
+:root { --header-h: 88px; }
+.brand-logo { display: flex; align-items: center; flex-shrink: 0; }
+.brand-logo img { height: 72px; width: auto; display: block; transition: height 0.25s ease; }
+.site-header.is-scrolled .header-inner { height: 70px; }
+.site-header.is-scrolled .brand-logo img { height: 56px; }
+.footer-brand { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+.footer-logo {
+  display: inline-flex; padding: 10px 14px; border-radius: 14px;
+  background: #fff; box-shadow: var(--shadow-sm);
+}
+.footer-logo img { height: 96px; width: auto; display: block; }
+@media (max-width: 780px) {
+  :root { --header-h: 74px; }
+  .brand-logo img { height: 60px; }
+  .site-header.is-scrolled .header-inner { height: 64px; }
+  .site-header.is-scrolled .brand-logo img { height: 50px; }
+  [id] { scroll-margin-top: 80px; }
+}
+@media (min-width: 781px) {
+  :root { --header-h: 96px; }
+  .brand-logo img { height: 82px; }
+}
