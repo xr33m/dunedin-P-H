@@ -1,5 +1,5 @@
 // Copies the static site into dist/ and minifies style.css + script.js.
-// Used by `npm run build` (Bolt / Netlify deploys publish dist/).
+// Used by `npm run build` (Vercel serves dist/).
 import { cpSync, rmSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { transformSync } from 'esbuild';
