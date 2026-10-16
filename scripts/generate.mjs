@@ -7,7 +7,7 @@
 import { readFileSync, writeFileSync, mkdirSync, rmSync, existsSync, readdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { SITE, SERVICES, AREAS, REVIEWS, STEPS } from './site-data.mjs';
+import { SITE, SERVICES, AREAS, REVIEWS, STEPS, TYPE_LABEL } from './site-data.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const IMAGES = JSON.parse(readFileSync(join(ROOT, 'scripts/images.json'), 'utf8'));
@@ -187,11 +187,11 @@ function footer({ home = false, contact = '#contact' } = {}) {
 <!-- /gen:footer -->`;
 }
 
-function contactSection(preselect) {
+function contactSection(preselect, place = 'Edinburgh') {
   const opts = [['Emergency plumbing', null], ...SERVICES.filter((s) => s.slug !== 'emergency-plumbing').map((s) => [s.name, s.slug]), ['Something else', null]]
     .map(([label, slug]) => `            <option value="${esc(label)}"${preselect && slug === preselect ? ' selected' : ''}>${esc(label)}</option>`)
     .join('\n');
-  const html = CONTACT_TPL.replace('{{SERVICE_OPTIONS}}', opts);
+  const html = CONTACT_TPL.replace('{{SERVICE_OPTIONS}}', opts).replace('{{CONTACT_H2}}', `Book a Plumber in ${esc(place)} — We’ll Call You Back`);
   return `<!-- gen:contact -->\n${html.trimEnd()}\n  <!-- /gen:contact -->`;
 }
 
@@ -217,14 +217,14 @@ const breadcrumbSchema = (items) => ({
   itemListElement: items.map(([label, url], i) => ({ '@type': 'ListItem', position: i + 1, name: label, item: SITE.url + url })),
 });
 
-function pageHero({ crumbs, title, lead, photo, photoAlt, eyebrow }) {
+function pageHero({ crumbs, title, benefit, lead, photo, photoAlt, eyebrow }) {
   return `  <section class="page-hero page-hero-v2">
     <div class="hero-decor" aria-hidden="true"></div>
     <div class="container page-hero-grid">
       <div class="page-hero-copy">
         ${breadcrumb(crumbs)}
         ${eyebrow ? chip(eyebrow, true) : ''}
-        <h1>${title}</h1>
+        <h1>${title}${benefit ? `<span class="h1-benefit"><span class="sr-only"> — </span>${benefit}</span>` : ''}</h1>
         <p class="page-hero-lead">${lead}</p>
         <div class="hero-actions">
           <a href="#contact" class="btn btn-primary btn-lg">Book a Callback ${ARROW}</a>
@@ -242,7 +242,7 @@ function pageHero({ crumbs, title, lead, photo, photoAlt, eyebrow }) {
   </section>`;
 }
 
-function reviewCards(names, heading = `${SITE.reviewCount} five-star reviews on Google`) {
+function reviewCards(names, heading = `Rated ${SITE.rating} on Google by ${SITE.reviewCount} Customers`) {
   const cards = names
     .map((n) => {
       const initials = n.split(/\s+/).slice(0, 2).map((w) => w[0]).join('').toUpperCase();
@@ -288,11 +288,11 @@ const faqSchema = (faqs) => ({
   mainEntity: faqs.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })),
 });
 
-const stepsSection = () => `  <section class="section section-alt">
+const stepsSection = (heading = 'How Our Plumbing Service Works') => `  <section class="section section-alt">
     <div class="container">
       <div class="section-head">
         ${chip('How it works')}
-        <h2>Simple, from first call to finished job</h2>
+        <h2>${heading}</h2>
       </div>
       <ol class="steps steps-3">
 ${STEPS.map(([t, d], i) => `        <li class="step">
@@ -304,23 +304,23 @@ ${STEPS.map(([t, d], i) => `        <li class="step">
     </div>
   </section>`;
 
-const EMERGENCY = `  <section class="emergency-banner">
+const emergency = (place = 'Edinburgh') => `  <section class="emergency-banner">
     <div class="container emergency-inner">
       <div>
         <p class="eyebrow eyebrow-light">Don't wait on this</p>
-        <h2>That drip won't still be a drip by morning.</h2>
-        <p>A small leak left overnight is a soaked ceiling by breakfast — and a far bigger bill than calling now. We're on call 24 hours a day, every day, and a real person answers.</p>
+        <h2>24/7 Emergency Plumber in ${esc(place)}</h2>
+        <p><strong>That drip won't still be a drip by morning.</strong> A small leak left overnight is a soaked ceiling by breakfast — and a far bigger bill than calling now. We're on call 24 hours a day, every day, and a real person answers.</p>
       </div>
       <a href="tel:${SITE.phoneIntl}" class="btn btn-primary btn-lg">Call ${SITE.phone}</a>
     </div>
   </section>`;
 
-function svcCard(s, href = svcUrl(s), sizes = '(max-width: 560px) 86vw, (max-width: 1100px) 33vw, 280px') {
+function svcCard(s, href = svcUrl(s), sizes = '(max-width: 560px) 86vw, (max-width: 1100px) 33vw, 280px', place = '') {
   return `          <article class="svc-card">
             ${photoBox(s.photo, s.photoAlt, ' svc-photo', { sizes })}
             <div class="svc-panel">
               <div class="svc-icon" aria-hidden="true">${icon(s.icon)}</div>
-              <h3>${esc(s.name)}</h3>
+              <h3>${esc(s.name)}${place ? ` in ${esc(place)}` : ''}</h3>
               <p>${esc(s.short)}</p>
               <a href="${href}" class="service-link">Learn more<span class="sr-only"> about ${esc(s.name)}</span> ${ARROW}</a>
             </div>
@@ -360,7 +360,7 @@ const businessNode = (extra = {}) => ({
   ...extra,
 });
 
-function shell({ path, title, description, body, schema = [], preload, home = false, ogImage }) {
+function shell({ path, title, description, body, schema = [], preload, home = false, ogImage, place = 'Edinburgh' }) {
   const canonical = SITE.url + path;
   const graph = JSON.stringify({ '@context': 'https://schema.org', '@graph': schema }, null, 1);
   const og = ogImage || largest('bath-freestanding');
@@ -397,7 +397,7 @@ ${header({ home })}
 
 <main id="main">
 ${body}
-${contactSection(pageService(path))}
+${contactSection(pageService(path), place)}
 </main>
 
 ${footer({ home })}
@@ -426,7 +426,7 @@ function servicePage(s) {
   const crumbs = [['Home', '/'], ['Services', '/services/'], [s.name, path]];
   const hasGallery = !!s.gallery;
   const relatedSvcs = s.related.map((r) => svcBy[r]);
-  const body = `${pageHero({ crumbs, title: esc(s.name) + ' in Edinburgh', lead: esc(s.intro), photo: s.heroPhoto || s.photo, photoAlt: s.heroAlt || s.photoAlt, eyebrow: 'Edinburgh, the Lothians &amp; Fife' })}
+  const body = `${pageHero({ crumbs, title: esc(s.name) + ' in Edinburgh', benefit: esc(s.benefit), lead: esc(s.intro), photo: s.heroPhoto || s.photo, photoAlt: s.heroAlt || s.photoAlt, eyebrow: 'Edinburgh, the Lothians &amp; Fife' })}
 
 ${TRUST_BAR}
 
@@ -434,7 +434,7 @@ ${TRUST_BAR}
     <div class="container split-2">
       <div>
         ${chip("What's included")}
-        <h2>${esc(s.name)}, done properly</h2>
+        <h2>${esc(s.name)} in Edinburgh — What’s Included</h2>
         ${s.body.map((p) => `<p class="body-copy">${esc(p)}</p>`).join('\n        ')}
       </div>
       <ul class="includes-list">
@@ -447,40 +447,40 @@ ${hasGallery ? `
     <div class="container">
       <div class="section-head">
         ${chip('Our work')}
-        <h2>${s.slug === 'bathroom-renovations' ? 'Real bathrooms we’ve built' : 'Recent jobs'}</h2>
+        <h2>${s.slug === 'bathroom-renovations' ? 'Bathroom Renovations We’ve Completed in Edinburgh' : `Recent ${esc(s.name)} Jobs in Edinburgh`}</h2>
         <p class="section-lead">Real photos from real Dunedin jobs — tap any photo to see it larger.</p>
       </div>
 ${galleryBlock(s.gallery, s.slug)}
     </div>
   </section>
 ` : ''}
-${stepsSection()}
+${stepsSection(`How Our ${esc(s.name)} Service Works — Price Agreed First`)}
 
-${reviewCards(s.reviews)}
+${reviewCards(s.reviews, `Rated ${SITE.rating} on Google by Edinburgh Customers`)}
 
-${faqSection(s.faqs)}
+${faqSection(s.faqs, `${esc(s.name)} in Edinburgh: Your Questions Answered`)}
 
   <section class="section section-alt">
     <div class="container">
       <div class="section-head">
         ${chip('Areas')}
-        <h2>${esc(s.name)} near you</h2>
+        <h2>${esc(s.name)} Across Edinburgh, the Lothians &amp; Fife</h2>
         <p class="section-lead">We cover Edinburgh, the Lothians and Fife. Pick your area for local details.</p>
       </div>
       ${areaPills(AREAS, (a) => comboUrl(a, s))}
     </div>
   </section>
 
-${EMERGENCY}
+${emergency()}
 
   <section class="section">
     <div class="container">
       <div class="section-head">
         ${chip('Related')}
-        <h2>You might also need</h2>
+        <h2>Related Plumbing Services in Edinburgh</h2>
       </div>
       <div class="card-grid card-grid-3">
-${relatedSvcs.map((r) => svcCard(r)).join('\n')}
+${relatedSvcs.map((r) => svcCard(r, svcUrl(r), undefined, 'Edinburgh')).join('\n')}
       </div>
     </div>
   </section>`;
@@ -496,7 +496,7 @@ ${relatedSvcs.map((r) => svcCard(r)).join('\n')}
 function servicesIndex() {
   const path = '/services/';
   const crumbs = [['Home', '/'], ['Services', path]];
-  const body = `${pageHero({ crumbs, title: 'Plumbing services in Edinburgh', lead: 'Everything from a dripping tap to a full bathroom renovation — priced before we start, done by the same named plumber, and left tidy.', photo: 'shower-room-8', photoAlt: 'Walk-in shower with black-framed doors and marble-effect wall panels', eyebrow: 'What we do' })}
+  const body = `${pageHero({ crumbs, title: 'Plumbing Services in Edinburgh', benefit: 'Fixed Prices, 24/7 Emergency Cover', lead: 'Everything from a dripping tap to a full bathroom renovation — priced before we start, done by the same named plumber, and left tidy.', photo: 'shower-room-8', photoAlt: 'Walk-in shower with black-framed doors and marble-effect wall panels', eyebrow: 'What we do' })}
 
 ${TRUST_BAR}
 
@@ -504,7 +504,7 @@ ${TRUST_BAR}
     <div class="container">
       <div class="section-head">
         ${chip('Services')}
-        <h2>Choose a service</h2>
+        <h2>Every Plumbing Service We Offer in Edinburgh</h2>
       </div>
       <div class="card-grid card-grid-4">
 ${SERVICES.map((s) => svcCard(s)).join('\n')}
@@ -512,7 +512,7 @@ ${SERVICES.map((s) => svcCard(s)).join('\n')}
     </div>
   </section>
 
-${EMERGENCY}`;
+${emergency()}`;
   const schema = [businessNode(), breadcrumbSchema(crumbs)];
   write(path, shell({ path, title: 'Plumbing Services Edinburgh | Dunedin Plumbing & Heating', description: trim(`Emergency plumbing, leak repairs, bathroom renovations, kitchens, radiators, drains and more across Edinburgh and the Lothians. 5.0★ from ${SITE.reviewCount} Google reviews.`), body, schema, preload: 'shower-room-8' }), '0.8');
 }
@@ -528,7 +528,7 @@ function areaHub(a) {
     [`Do you charge extra to come to ${a.name}?`, `You'll get a clear price before any work starts — the same upfront pricing we use everywhere we cover.`],
   ];
   const reviewNames = [...new Set([...SERVICES[hash(a.slug) % SERVICES.length].reviews, 'Margaret Miller', 'Graham Steele'])].slice(0, 3);
-  const body = `${pageHero({ crumbs, title: `Plumber in ${esc(a.name)}`, lead: esc(a.intro), photo: pickPhoto, photoAlt: 'A recent Dunedin Plumbing & Heating job', eyebrow: `${esc(a.name)}, ${esc(a.region)} · ${esc(a.postcodes)}` })}
+  const body = `${pageHero({ crumbs, title: `Plumber in ${esc(a.name)}`, benefit: 'Fixed Prices &amp; 24/7 Emergency Cover', lead: esc(a.intro), photo: pickPhoto, photoAlt: 'A recent Dunedin Plumbing & Heating job', eyebrow: `${esc(a.name)}, ${esc(a.region)} · ${esc(a.postcodes)}` })}
 
 ${TRUST_BAR}
 
@@ -536,7 +536,7 @@ ${TRUST_BAR}
     <div class="container split-2">
       <div>
         ${chip(`Plumbing in ${esc(a.name)}`)}
-        <h2>A local plumber who knows ${esc(a.name)}’s homes</h2>
+        <h2>A Local ${esc(a.name)} Plumber Who Knows Your Home</h2>
         <p class="body-copy">${esc(a.local)}</p>
         <p class="body-copy">Whatever’s behind your walls, you get the same thing: the problem explained in plain English, a price agreed before any work starts, and the same named plumber if you ever need us again.</p>
       </div>
@@ -555,25 +555,26 @@ ${TRUST_BAR}
     <div class="container">
       <div class="section-head">
         ${chip(`Services in ${esc(a.name)}`)}
-        <h2>Everything from a dripping tap to a full renovation</h2>
+        <h2>Plumbing Services in ${esc(a.name)}</h2>
+        <p class="section-lead">Everything from a dripping tap to a full bathroom renovation — priced before we start.</p>
       </div>
       <div class="card-grid card-grid-4">
-${SERVICES.map((s) => svcCard(s, comboUrl(a, s))).join('\n')}
+${SERVICES.map((s) => svcCard(s, comboUrl(a, s), undefined, a.name)).join('\n')}
       </div>
     </div>
   </section>
 
 ${reviewCards(reviewNames)}
 
-${faqSection(faqs, `Plumbing in ${esc(a.name)}: common questions`)}
+${faqSection(faqs, `Plumbing in ${esc(a.name)}: Your Questions Answered`)}
 
-${EMERGENCY}
+${emergency(a.name)}
 
   <section class="section">
     <div class="container">
       <div class="section-head">
         ${chip('Nearby')}
-        <h2>Also covering</h2>
+        <h2>We Also Cover Areas Near ${esc(a.name)}</h2>
       </div>
       ${areaPills(near, areaUrl)}
       <p class="areas-note"><a href="/areas/">See every area we cover →</a></p>
@@ -584,21 +585,21 @@ ${EMERGENCY}
     faqSchema(faqs),
     breadcrumbSchema(crumbs),
   ];
-  write(path, shell({ path, title: `Plumber in ${a.name} (${a.postcodes}) | Dunedin Plumbing & Heating`, description: trim(`Trusted local plumber in ${a.name}, ${a.region}. Emergency call-outs 24/7, leak repairs, bathrooms, kitchens and radiators. 5.0★ from ${SITE.reviewCount} Google reviews. Call ${SITE.phone}.`), body, schema, preload: pickPhoto }), '0.8');
+  write(path, shell({ place: a.name, path, title: `Plumber in ${a.name} (${a.postcodes}) | Dunedin Plumbing & Heating`, description: trim(`Trusted local plumber in ${a.name}, ${a.region}. Emergency call-outs 24/7, leak repairs, bathrooms, kitchens and radiators. 5.0★ from ${SITE.reviewCount} Google reviews. Call ${SITE.phone}.`), body, schema, preload: pickPhoto }), '0.8');
 }
 
 function areasIndex() {
   const path = '/areas/';
   const crumbs = [['Home', '/'], ['Areas', path]];
   const regions = [...new Set(AREAS.map((a) => a.region))];
-  const body = `${pageHero({ crumbs, title: 'Areas we cover', lead: 'Edinburgh, the Lothians and Fife — the same named plumber, the same upfront pricing and the same 24-hour emergency cover wherever you are.', photo: 'bath-scallop-1', photoAlt: 'Renovated bathroom with white scallop wall tiles', eyebrow: 'Coverage' })}
+  const body = `${pageHero({ crumbs, title: 'Areas We Cover', benefit: 'Edinburgh, the Lothians &amp; Fife', lead: 'Edinburgh, the Lothians and Fife — the same named plumber, the same upfront pricing and the same 24-hour emergency cover wherever you are.', photo: 'bath-scallop-1', photoAlt: 'Renovated bathroom with white scallop wall tiles', eyebrow: 'Coverage' })}
 
 ${TRUST_BAR}
 
   <section class="section">
     <div class="container">
 ${regions.map((r) => `      <div class="area-region">
-        <h2>${esc(r)}</h2>
+        <h2>Plumbers in ${esc(r)}</h2>
         <div class="area-cards">
 ${AREAS.filter((a) => a.region === r).map((a) => `          <a class="area-card" href="${areaUrl(a)}">
             <span class="area-card-icon" aria-hidden="true">${icon('pin')}</span>
@@ -611,7 +612,7 @@ ${AREAS.filter((a) => a.region === r).map((a) => `          <a class="area-card"
     </div>
   </section>
 
-${EMERGENCY}`;
+${emergency()}`;
   const schema = [businessNode({ areaServed: AREAS.map((a) => ({ '@type': 'Place', name: `${a.name}, ${a.region}` })) }), breadcrumbSchema(crumbs)];
   write(path, shell({ path, title: 'Areas We Cover | Edinburgh Plumber | Dunedin Plumbing & Heating', description: trim(`Local plumber covering ${AREAS.slice(0, 8).map((a) => a.name).join(', ')} and more across Edinburgh and the Lothians. 24/7 emergency call-outs.`), body, schema, preload: 'bath-scallop-1' }), '0.7');
 }
@@ -629,7 +630,7 @@ function comboPage(a, s) {
     s.faqs[hash(a.slug) % s.faqs.length],
   ];
   const others = SERVICES.filter((x) => x.slug !== s.slug);
-  const body = `${pageHero({ crumbs, title: `${esc(s.name)} in ${esc(a.name)}`, lead: esc(s.lead(a)), photo: s.photo, photoAlt: s.photoAlt, eyebrow: `${esc(a.name)} · ${esc(a.postcodes)}` })}
+  const body = `${pageHero({ crumbs, title: `${esc(s.name)} in ${esc(a.name)}`, benefit: esc(s.benefit), lead: esc(s.lead(a)), photo: s.photo, photoAlt: s.photoAlt, eyebrow: `${esc(a.name)} · ${esc(a.postcodes)}` })}
 
 ${TRUST_BAR}
 
@@ -637,13 +638,13 @@ ${TRUST_BAR}
     <div class="container split-2">
       <div>
         ${chip(`${esc(s.name)} in ${esc(a.name)}`)}
-        <h2>What ${esc(a.name)} homes need</h2>
+        <h2>${esc(s.name)} for ${esc(a.name)}’s ${TYPE_LABEL[t1]}</h2>
         <p class="body-copy">${esc(a.local)}</p>
         <p class="body-copy">${esc(s.angle[t1])}</p>
         ${t2 && t2 !== t1 ? `<p class="body-copy">${esc(s.angle[t2])}</p>` : ''}
       </div>
       <div>
-        <h3 class="list-title">What’s included</h3>
+        <h3 class="list-title">What’s included in ${esc(a.name)}</h3>
         <ul class="includes-list">
           ${s.includes.map((i) => `<li>${icon('check')}<span>${esc(i)}</span></li>`).join('\n          ')}
         </ul>
@@ -652,22 +653,22 @@ ${TRUST_BAR}
     </div>
   </section>
 
-${reviewCards([review, second].filter(Boolean), `What customers say about Kevin`)}
+${reviewCards([review, second].filter(Boolean))}
 
-${faqSection(faqs, `${esc(s.name)} in ${esc(a.name)}: your questions`)}
+${faqSection(faqs, `${esc(s.name)} in ${esc(a.name)}: Your Questions Answered`)}
 
-${EMERGENCY}
+${emergency(a.name)}
 
   <section class="section">
     <div class="container">
       <div class="section-head">
         ${chip(`More in ${esc(a.name)}`)}
-        <h2>Other services in ${esc(a.name)}</h2>
+        <h2>More Plumbing Services in ${esc(a.name)}</h2>
       </div>
       <div class="link-grid">
-        ${others.map((x) => `<a href="${comboUrl(a, x)}" class="link-card"><span class="link-card-icon" aria-hidden="true">${icon(x.icon)}</span><span>${esc(x.name)}</span>${ARROW}</a>`).join('\n        ')}
+        ${others.map((x) => `<a href="${comboUrl(a, x)}" class="link-card"><span class="link-card-icon" aria-hidden="true">${icon(x.icon)}</span><span>${esc(x.name)} in ${esc(a.name)}</span>${ARROW}</a>`).join('\n        ')}
       </div>
-      <h3 class="list-title near-title">${esc(s.name)} nearby</h3>
+      <h2 class="list-title near-title">${esc(s.name)} Near ${esc(a.name)}</h2>
       ${areaPills(near, (n) => comboUrl(n, s))}
       <p class="areas-note"><a href="${areaUrl(a)}">All plumbing services in ${esc(a.name)} →</a></p>
     </div>
@@ -678,7 +679,7 @@ ${EMERGENCY}
     faqSchema(faqs),
     breadcrumbSchema(crumbs),
   ];
-  write(path, shell({ path, title: `${s.name} in ${a.name} | Dunedin Plumbing & Heating`, description: trim(`${s.name} in ${a.name} (${a.postcodes}) from a 5-star rated local plumber. ${s.short} Call ${SITE.phone}.`), body, schema, preload: s.photo, ogImage: largest(s.photo) }), '0.6');
+  write(path, shell({ place: a.name, path, title: `${s.name} in ${a.name} | Dunedin Plumbing & Heating`, description: trim(`${s.name} in ${a.name} (${a.postcodes}) from a 5-star rated local plumber. ${s.short} Call ${SITE.phone}.`), body, schema, preload: s.photo, ogImage: largest(s.photo) }), '0.6');
 }
 
 // ---------- homepage / 404 sections ----------
@@ -689,7 +690,7 @@ function homeServices() {
       <div class="section-head section-head-split">
         <div>
           ${chip('Plumbing services')}
-          <h2>Top-rated plumbing across Edinburgh</h2>
+          <h2>Plumbing Services in Edinburgh, the Lothians &amp; Fife</h2>
         </div>
         <a href="/services/" class="btn btn-outline">All services ${ARROW}</a>
       </div>
@@ -717,7 +718,7 @@ function homeWork() {
       <div class="section-head section-head-split">
         <div>
           ${chip('Recent work')}
-          <h2>Real jobs, real photos</h2>
+          <h2>Recent Bathroom &amp; Plumbing Jobs in Edinburgh</h2>
         </div>
         <a href="/services/bathroom-renovations/#gallery" class="btn btn-outline">See the bathroom gallery ${ARROW}</a>
       </div>

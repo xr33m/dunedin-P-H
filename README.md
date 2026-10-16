@@ -227,7 +227,8 @@ preview the site — the site itself is still plain HTML/CSS/JS.
       serverless function (`api/lead.js`) that validates and forwards
       to the Airtable automation "Website lead → Leads + email Kevin" in
       the **Dunedin Plumbing & Heating CRM** base. It saves the lead
-      (Status = New) and emails dunedinph@gmail.com. Where the function
+      (Status = New) and emails dunedinph@gmail.com and
+      xr33m.marketing@gmail.com. Where the function
       isn't running (e.g. Bolt preview) the form falls back to opening the
       visitor's email app addressed to dunedinph@gmail.com.
       Payload keys: name, phone, email, postcode, urgency, service, day,
@@ -261,6 +262,15 @@ Dunedin's own brand colours, copy and claims):
 - [x] Testimonials: dark band review carousel with avatars and stars
 - [ ] Real photos for: hero (Kevin + van), each service card, about image
 - [ ] Optional: carry the hero/photo layout through to service and area pages
+
+### Heading structure (on-page SEO)
+
+Every page has exactly one H1 = primary service + area + benefit (the
+benefit sits in a styled span inside the H1). H2s carry the secondary
+services and the area: what's included, how it works, reviews, FAQs,
+24/7 emergency plumber in <area>, more services in <area>, nearby areas,
+and "Book a plumber in <area>". Service benefits live in `site-data.mjs`
+(`benefit`). Audited: 302 pages, one unique H1 each, no skipped levels.
 
 ## Phase 5 — Analytics & Conversion Tracking *(suggested addition)*
 

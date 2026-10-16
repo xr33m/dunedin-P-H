@@ -1701,3 +1701,17 @@ details.faq-item p { padding: 0 20px 18px; margin: 0; color: var(--text-muted); 
   .main-nav.is-open > a { text-align: left; }
   .main-nav.is-open > a::after, .main-nav.is-open .nav-top::after { display: none; }
 }
+
+/* SEO headings: benefit line inside the H1, brand tagline below */
+.h1-benefit {
+  display: block; margin-top: 0.35em;
+  font-size: 0.48em; line-height: 1.15; letter-spacing: 0.01em;
+  color: var(--teal-400);
+}
+.page-hero-v2 h1 { max-width: 22ch; }
+.hero-tagline {
+  font-family: var(--font-display); font-weight: 700; text-transform: uppercase;
+  font-size: clamp(1.15rem, 2vw, 1.45rem); letter-spacing: 0.02em;
+  color: #fff; margin: 0 0 16px;
+}
+.emergency-inner p strong { color: #fff; }
