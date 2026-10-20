@@ -406,7 +406,7 @@ ${contactSection(pageService(path), place)}
 
 ${footer({ home })}
 
-<script src="/script.js" defer></script>
+<script type="module" src="/script.js"></script>
 </body>
 </html>
 `;

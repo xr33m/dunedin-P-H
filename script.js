@@ -2,6 +2,11 @@
 // Small, dependency-free enhancements: mobile nav, sticky header shadow,
 // back-to-top button, and a no-backend contact form handler.
 
+import { injectSpeedInsights } from '@vercel/speed-insights';
+
+// Initialize Vercel Speed Insights
+injectSpeedInsights();
+
 const PREFERS_REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 document.addEventListener('DOMContentLoaded', () => {
