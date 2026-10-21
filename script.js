@@ -6,7 +6,7 @@
 // Paste each conversion action's label from Google Ads (the part after the slash
 // in 'AW-16755258544/xxxx'). Empty labels are skipped, so nothing breaks before then.
 const ADS_ID = 'AW-16755258544';
-const ADS_LABELS = { lead: 'dsLgCKG40voZELDpw7U-', call: '' };
+const ADS_LABELS = { lead: 'dsLgCKG40voZELDpw7U-', call: 'NLwNCMux1aQdELDpw7U-' };
 
 function trackConversion(kind, params = {}) {
   if (typeof window.gtag !== 'function') return;
