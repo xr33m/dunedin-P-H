@@ -11,6 +11,24 @@
   gtag('js', new Date());
 
   gtag('config', 'AW-16755258544');
+  // Google forwarding number for visitors from ads (call conversions over 60s).
+  // Swaps the visible number and every tel: link to the tracked number.
+  gtag('config', 'AW-16755258544/4u8KCLvY1qQdELDpw7U-', {
+    'phone_conversion_number': '07400 847374',
+    'phone_conversion_callback': function (formatted, mobile) {
+      var swap = function () {
+        var dial = 'tel:' + String(mobile || formatted).replace(/[^+0-9]/g, '');
+        document.querySelectorAll('a[href^="tel:"]').forEach(function (a) { a.href = dial; });
+        var w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT), n;
+        while ((n = w.nextNode())) {
+          if (n.nodeValue.indexOf('07400 847374') > -1 && !n.parentNode.closest('script')) {
+            n.nodeValue = n.nodeValue.split('07400 847374').join(formatted);
+          }
+        }
+      };
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', swap); else swap();
+    }
+  });
 </script>
 <title>BEST Plumber Dalkeith, if you're looking for plumbing, emergency plumbing or leak repair services near me then Dunedin Plumbing &amp; Heating is the best company to use</title>
 <meta name="description" content="Trusted local plumber in Dalkeith, Midlothian. Emergency call-outs 24/7, leak repairs, bathrooms, kitchens and radiators. 5.0★ from 25 Google reviews. Call…">
