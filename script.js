@@ -2,6 +2,25 @@
 // Small, dependency-free enhancements: mobile nav, sticky header shadow,
 // back-to-top button, and a no-backend contact form handler.
 
+// Google Ads conversion tracking (tag loaded in each page <head>).
+// Paste each conversion action's label from Google Ads (the part after the slash
+// in 'AW-16755258544/xxxx'). Empty labels are skipped, so nothing breaks before then.
+const ADS_ID = 'AW-16755258544';
+const ADS_LABELS = { lead: '', call: '' };
+
+function trackConversion(kind, params = {}) {
+  if (typeof window.gtag !== 'function') return;
+  window.gtag('event', kind === 'call' ? 'phone_call_click' : 'generate_lead', params);
+  if (ADS_LABELS[kind]) window.gtag('event', 'conversion', { send_to: `${ADS_ID}/${ADS_LABELS[kind]}`, ...params });
+}
+
+function initCallTracking() {
+  document.addEventListener('click', (event) => {
+    const link = event.target.closest('a[href^="tel:"]');
+    if (link) trackConversion('call', { link_url: link.getAttribute('href') });
+  });
+}
+
 const PREFERS_REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -18,6 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initHeroParallax();
   initSubmenus();
   initLightbox();
+  initCallTracking();
   const year = document.getElementById('year');
   if (year) year.textContent = new Date().getFullYear();
 });
@@ -247,6 +267,7 @@ function initContactForm() {
     submitBtn.disabled = false;
     if (result === 'sent') {
       form.reset();
+      trackConversion('lead', { lead_source: data.lead_source });
       showSuccess(data);
       return;
     }
@@ -303,6 +324,7 @@ function initQuickForm() {
     btn.disabled = false;
 
     if (result === 'sent') {
+      trackConversion('lead', { lead_source: data.lead_source });
       const done = document.createElement('div');
       done.className = 'quick-done';
       done.setAttribute('tabindex', '-1');
