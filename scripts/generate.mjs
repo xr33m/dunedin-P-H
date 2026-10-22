@@ -7,7 +7,7 @@
 import { readFileSync, writeFileSync, mkdirSync, rmSync, existsSync, readdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { SITE, SERVICES, AREAS, REVIEWS, STEPS, TYPE_LABEL } from './site-data.mjs';
+import { SITE, SERVICES, AREAS, REVIEWS, STEPS, TYPE_LABEL, INDEXED_COMBOS } from './site-data.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const IMAGES = JSON.parse(readFileSync(join(ROOT, 'scripts/images.json'), 'utf8'));
@@ -363,7 +363,7 @@ const businessNode = (extra = {}) => ({
   ...extra,
 });
 
-function shell({ path, title, description, body, schema = [], preload, home = false, ogImage, place = 'Edinburgh' }) {
+function shell({ path, title, description, body, schema = [], preload, home = false, ogImage, place = 'Edinburgh', noindex = false }) {
   const canonical = SITE.url + path;
   const graph = JSON.stringify({ '@context': 'https://schema.org', '@graph': schema }, null, 1);
   const og = ogImage || largest('bath-freestanding');
@@ -403,7 +403,7 @@ function shell({ path, title, description, body, schema = [], preload, home = fa
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
 <link rel="canonical" href="${canonical}">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="${noindex ? 'noindex, follow' : 'index, follow'}">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Dunedin Plumbing &amp; Heating">
 <meta property="og:title" content="${esc(title)}">
@@ -445,12 +445,15 @@ function pageService(path) {
   return m && svcBy[m[2]] ? m[2] : null;
 }
 
-function write(path, html, priority = '0.6') {
+let generated = 0;
+function write(path, html, priority = '0.6', indexed = true) {
   const dir = join(ROOT, path);
   mkdirSync(dir, { recursive: true });
   writeFileSync(join(dir, 'index.html'), html);
-  pages.push({ path, priority });
+  generated++;
+  if (indexed) pages.push({ path, priority }); // only indexable pages go in the sitemap
 }
+const isIndexedCombo = (a, s) => INDEXED_COMBOS.services.includes(s.slug) && INDEXED_COMBOS.areas.includes(a.slug);
 
 // ---------- page builders ----------
 function servicePage(s) {
@@ -711,7 +714,7 @@ ${emergency(a.name)}
     faqSchema(faqs),
     breadcrumbSchema(crumbs),
   ];
-  write(path, shell({ place: a.name, path, title: metaTitle(s.name, a.name, s.kw, kwOf(s.related[0]), kwOf(s.related[1])), description: trim(`${s.name} in ${a.name} (${a.postcodes}) from a 5-star rated local plumber. ${s.short} Call ${SITE.phone}.`), body, schema, preload: s.photo, ogImage: largest(s.photo) }), '0.6');
+  write(path, shell({ place: a.name, path, title: metaTitle(s.name, a.name, s.kw, kwOf(s.related[0]), kwOf(s.related[1])), description: trim(`${s.name} in ${a.name} (${a.postcodes}) from a 5-star rated local plumber. ${s.short} Call ${SITE.phone}.`), body, schema, preload: s.photo, ogImage: largest(s.photo), noindex: !isIndexedCombo(a, s) }), '0.6', isIndexedCombo(a, s));
 }
 
 // ---------- About page ----------
@@ -975,4 +978,4 @@ ${pages.map((p) => `  <url><loc>${SITE.url}${p.path}</loc><lastmod>${TODAY}</las
 
 // Redirects and headers live in vercel.json.
 
-console.log(`Generated ${pages.length} pages (${SERVICES.length} services × ${AREAS.length} areas).`);
+console.log(`Generated ${generated} pages, ${pages.length} indexed/in sitemap (${SERVICES.length} services × ${AREAS.length} areas).`);

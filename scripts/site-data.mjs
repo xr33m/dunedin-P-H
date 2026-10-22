@@ -523,3 +523,16 @@ export const TYPE_LABEL = {
   coastal: 'coastal homes',
   modern: 'modern and newer homes',
 };
+
+// Service-in-area pages that are indexed and listed in the sitemap.
+// Every other combo page still exists (for visitors and ads) but is noindex,follow
+// until it has something genuinely local (a job there, a local review, photos).
+// Edit these two lists to change which pages Google is asked to index.
+export const INDEXED_COMBOS = {
+  services: ['emergency-plumbing', 'leak-repair', 'bathroom-renovations'],
+  areas: [
+    'leith', 'portobello', 'morningside', 'bruntsfield', 'marchmont', 'newington', 'stockbridge',
+    'new-town', 'old-town', 'corstorphine', 'gorgie-dalry', 'murrayfield', 'colinton', 'liberton',
+    'trinity-granton', 'musselburgh', 'dalkeith', 'dunfermline',
+  ],
+};
