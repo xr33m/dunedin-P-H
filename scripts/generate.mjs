@@ -8,6 +8,7 @@ import { readFileSync, writeFileSync, mkdirSync, rmSync, existsSync, readdirSync
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { SITE, SERVICES, AREAS, REVIEWS, STEPS, TYPE_LABEL, INDEXED_COMBOS } from './site-data.mjs';
+import { GUIDES } from './guides-data.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const IMAGES = JSON.parse(readFileSync(join(ROOT, 'scripts/images.json'), 'utf8'));
@@ -110,6 +111,7 @@ function header({ home = false, contact = '#contact' } = {}) {
           </ul>
         </div>
       </div>
+      <a href="/guides/">Guides</a>
       <a href="/about/">About</a>
       <a href="${h('reviews')}">Reviews</a>
       <a href="${contact}">Contact</a>
@@ -162,6 +164,7 @@ function footer({ home = false, contact = '#contact' } = {}) {
       <a href="mailto:${SITE.email}">${SITE.email}</a>
       <span>Open 24 hours</span>
       <a href="/about/">About us</a>
+      <a href="/guides/">Plumbing guides</a>
       <a href="${h('reviews')}">Reviews</a>
       <a href="${contact}">Book a callback</a>
     </div>
@@ -455,6 +458,144 @@ function write(path, html, priority = '0.6', indexed = true) {
 }
 const isIndexedCombo = (a, s) => INDEXED_COMBOS.services.includes(s.slug) && INDEXED_COMBOS.areas.includes(a.slug);
 
+
+// ---------- guides (blog) ----------
+const guideUrl = (g) => `/guides/${g.slug}/`;
+const guideBy = Object.fromEntries(GUIDES.map((g) => [g.slug, g]));
+// escape text, then turn [[text|/url/]] into internal links
+const rich = (t) => esc(t).replace(/\[\[([^|\]]+)\|([^\]]+)\]\]/g, (_, txt, url) => `<a href="${url}">${txt}</a>`);
+const plain = (t) => t.replace(/\[\[([^|\]]+)\|[^\]]+\]\]/g, '$1');
+const fmtDate = (d) => new Date(d + 'T12:00').toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+
+function guideCard(g) {
+  return `          <article class="guide-card">
+            <a href="${guideUrl(g)}" class="guide-card-media" tabindex="-1" aria-hidden="true">${photoBox(g.photo, '', ' guide-photo', { sizes: '(max-width: 560px) 92vw, (max-width: 1100px) 45vw, 360px' })}</a>
+            <div class="guide-card-body">
+              <h3><a href="${guideUrl(g)}">${esc(g.title)}</a></h3>
+              <p>${esc(g.excerpt)}</p>
+              <a href="${guideUrl(g)}" class="service-link">Read the guide<span class="sr-only">: ${esc(g.title)}</span> ${ARROW}</a>
+            </div>
+          </article>`;
+}
+
+function guideLinks(list, heading) {
+  if (!list.length) return '';
+  return `  <section class="section section-alt">
+    <div class="container">
+      <div class="section-head">
+        ${chip('Guides')}
+        <h2>${heading}</h2>
+      </div>
+      <div class="guide-grid">
+${list.slice(0, 3).map(guideCard).join('\n')}
+      </div>
+    </div>
+  </section>`;
+}
+
+function guidePage(g) {
+  const path = guideUrl(g);
+  const crumbs = [['Home', '/'], ['Guides', '/guides/'], [g.title, path]];
+  const svcs = g.services.map((x) => svcBy[x]);
+  const others = GUIDES.filter((o) => o !== g).sort((a, b) => b.services.filter((x) => g.services.includes(x)).length - a.services.filter((x) => g.services.includes(x)).length).slice(0, 3);
+  const section = (sec) => `        <h2>${esc(sec.h2)}</h2>
+${(sec.paras || []).map((p) => `        <p>${rich(p)}</p>`).join('\n')}
+${sec.list ? `        <ul class="guide-list">\n${sec.list.map((li) => `          <li>${rich(li)}</li>`).join('\n')}\n        </ul>` : ''}
+${sec.table ? `        <table class="guide-table"><tbody>\n${sec.table.map(([a, b]) => `          <tr><th scope="row">${esc(a)}</th><td>${esc(b)}</td></tr>`).join('\n')}\n        </tbody></table>` : ''}
+${(sec.after || []).map((p) => `        <p>${rich(p)}</p>`).join('\n')}`;
+  const body = `${pageHero({ crumbs, title: esc(g.title), benefit: esc(g.benefit), lead: esc(g.excerpt), photo: g.photo, photoAlt: g.photoAlt, eyebrow: 'Edinburgh plumbing guide' })}
+
+  <section class="section">
+    <div class="container guide-layout">
+      <article class="guide-body">
+        <p class="guide-meta">By Dunedin Plumbing &amp; Heating · Updated <time datetime="${g.published}">${fmtDate(g.published)}</time></p>
+        <aside class="guide-keypoints" aria-label="Key points">
+          <p class="guide-keypoints-title">The short version</p>
+          <ul>
+${g.keyPoints.map((k) => `            <li>${icon('check')}<span>${rich(k)}</span></li>`).join('\n')}
+          </ul>
+        </aside>
+${g.sections.map(section).join('\n')}
+      </article>
+      <aside class="guide-side">
+        <div class="guide-side-card">
+          <p class="guide-side-title">Need a hand with this?</p>
+          <p>Local Edinburgh plumber, 24/7 for emergencies. Price agreed before we start.</p>
+          <a href="tel:${SITE.phoneIntl}" class="btn btn-primary">${icon('phone')}<span>${SITE.phone}</span></a>
+          <a href="#contact" class="btn btn-outline">Book a callback</a>
+          <p class="guide-side-sub">Related services</p>
+          <ul>
+${svcs.map((x) => `            <li><a href="${svcUrl(x)}">${esc(x.name)}</a></li>`).join('\n')}
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+${faqSection(g.faqs, `${esc(g.title.replace(/\?$/, ''))}: Common Questions`)}
+
+${emergency()}
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        ${chip('Services')}
+        <h2>The Services This Guide Relates To</h2>
+      </div>
+      <div class="card-grid card-grid-3">
+${svcs.map((x) => svcCard(x, svcUrl(x), undefined, 'Edinburgh')).join('\n')}
+      </div>
+    </div>
+  </section>
+
+${guideLinks(others, 'More Plumbing Guides for Edinburgh Homes')}`;
+  const schema = [
+    businessNode(),
+    {
+      '@type': 'Article',
+      headline: g.title,
+      description: g.description,
+      image: SITE.url + largest(g.photo),
+      datePublished: g.published,
+      dateModified: g.published,
+      author: { '@type': 'Organization', name: SITE.name, url: SITE.url },
+      publisher: { '@id': `${SITE.url}/#business` },
+      mainEntityOfPage: SITE.url + path,
+      about: svcs.map((x) => ({ '@type': 'Service', name: x.name })),
+    },
+    faqSchema(g.faqs),
+    breadcrumbSchema(crumbs),
+  ];
+  const [primary, k1, k2, k3] = g.kw;
+  write(path, shell({ path, title: metaTitle(primary, 'Edinburgh', k1, k2, k3), description: trim(g.description), body, schema, preload: g.photo, ogImage: largest(g.photo) }), '0.7');
+}
+
+function guidesIndex() {
+  const path = '/guides/';
+  const crumbs = [['Home', '/'], ['Guides', path]];
+  const body = `${pageHero({ crumbs, title: 'Plumbing Guides for Edinburgh Homes', benefit: 'Straight Answers From a Local Plumber', lead: 'Practical advice for Edinburgh tenements, flats and houses — what to do in an emergency, what things cost, and when it’s worth calling a plumber.', photo: 'copper-supply-valves', photoAlt: 'Copper water pipes with isolation valves', eyebrow: 'Guides' })}
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        ${chip('All guides')}
+        <h2>Edinburgh Plumbing Advice, Costs &amp; Emergency Help</h2>
+      </div>
+      <div class="guide-grid">
+${GUIDES.map(guideCard).join('\n')}
+      </div>
+    </div>
+  </section>
+
+${emergency()}`;
+  const schema = [
+    businessNode(),
+    { '@type': 'CollectionPage', name: 'Plumbing Guides for Edinburgh Homes', url: SITE.url + path, hasPart: GUIDES.map((g) => ({ '@type': 'Article', headline: g.title, url: SITE.url + guideUrl(g) })) },
+    breadcrumbSchema(crumbs),
+  ];
+  write(path, shell({ path, title: metaTitle('Plumbing Advice', 'Edinburgh', 'emergency plumbing', 'leak repair', 'bathroom renovation'), description: trim('Practical plumbing guides for Edinburgh homes: burst pipes, stopcocks, tenement leaks, lead pipes, low water pressure and what bathrooms and emergency plumbers cost.'), body, schema, preload: 'copper-supply-valves' }), '0.7');
+}
+
 // ---------- page builders ----------
 function servicePage(s) {
   const path = svcUrl(s);
@@ -505,6 +646,8 @@ ${faqSection(s.faqs, `${esc(s.name)} in Edinburgh: Your Questions Answered`)}
       ${areaPills(AREAS, (a) => comboUrl(a, s))}
     </div>
   </section>
+
+${guideLinks(GUIDES.filter((g) => g.services.includes(s.slug)), `Helpful ${esc(s.name)} Guides for Edinburgh Homes`)}
 
 ${emergency()}
 
@@ -966,6 +1109,8 @@ areasIndex();
 aboutPage();
 AREAS.forEach(areaHub);
 AREAS.forEach((a) => SERVICES.forEach((s) => comboPage(a, s)));
+guidesIndex();
+GUIDES.forEach(guidePage);
 
 refreshStatic('index.html', { header: header({ home: true }), services: homeServices(), work: homeWork(), areas: homeAreas(), contact: contactSection(null), footer: footer({ home: true }) });
 refreshStatic('404.html', { header: header({ contact: '/#contact' }), footer: footer({ contact: '/#contact' }) });
