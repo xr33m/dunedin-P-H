@@ -12,6 +12,10 @@
     "generate": "node scripts/generate.mjs"
   },
   "devDependencies": {
+    "esbuild": "^0.28.2",
     "vite": "^6.0.0"
+  },
+  "dependencies": {
+    "@vercel/analytics": "^2.0.1"
   }
 }
