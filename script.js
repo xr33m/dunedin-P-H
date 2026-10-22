@@ -2,6 +2,10 @@
 // Small, dependency-free enhancements: mobile nav, sticky header shadow,
 // back-to-top button, and a no-backend contact form handler.
 
+// Vercel Web Analytics
+import { inject } from '@vercel/analytics';
+inject();
+
 // Google Ads conversion tracking (tag loaded in each page <head>).
 // Paste each conversion action's label from Google Ads (the part after the slash
 // in 'AW-16755258544/xxxx'). Empty labels are skipped, so nothing breaks before then.
