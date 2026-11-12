@@ -6,6 +6,8 @@
 // variable in Vercel (Project → Settings → Environment Variables).
 const DEFAULT_WEBHOOK =
   'https://hooks.airtable.com/workflows/v1/genericWebhook/appvDHO853vl1JkVW/wflN5Vap1Zq2EqY7X/wtrsQ2KTZvsKPn5M7';
+// Make scenario "8. Dunedin Lead → Email Kevin & Ryan" (Gmail, so it can reach any address).
+const DEFAULT_MAKE_WEBHOOK = 'https://hook.eu2.make.com/1o9mmoq6urqhjg2s7uvqanpnvejh6ufs';
 
 const FIELDS = ['name', 'phone', 'email', 'postcode', 'urgency', 'service', 'day', 'date', 'time', 'message', 'page', 'lead_source', 'submitted_at'];
 
@@ -33,15 +35,26 @@ export default async function handler(req, res) {
   lead.lead_source = lead.lead_source || 'Website form';
   lead.submitted_at = new Date().toISOString();
 
-  try {
-    const r = await fetch(process.env.AIRTABLE_LEAD_WEBHOOK || DEFAULT_WEBHOOK, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(lead),
-    });
-    if (!r.ok) throw new Error(`Airtable responded ${r.status}`);
-  } catch (err) {
-    console.error('Lead forward failed:', err.message);
+  // Send to both: Airtable saves the lead, Make emails it to Kevin and Ryan.
+  // The enquiry counts as received if either one accepts it.
+  const targets = {
+    airtable: process.env.AIRTABLE_LEAD_WEBHOOK || DEFAULT_WEBHOOK,
+    make: process.env.MAKE_LEAD_WEBHOOK || DEFAULT_MAKE_WEBHOOK,
+  };
+  const results = await Promise.allSettled(
+    Object.entries(targets).map(async ([name, url]) => {
+      const r = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(lead),
+      });
+      if (!r.ok) throw new Error(`${name} responded ${r.status}`);
+      return name;
+    }),
+  );
+  const failed = results.filter((r) => r.status === 'rejected');
+  failed.forEach((r) => console.error('Lead forward failed:', r.reason?.message));
+  if (failed.length === results.length) {
     return res.status(502).json({ ok: false, error: 'Could not save enquiry' });
   }
   return res.status(200).json({ ok: true });
